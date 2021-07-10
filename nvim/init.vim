@@ -3,11 +3,11 @@ set nocompatible              " be iMproved, required
 filetype on " required
 filetype plugin indent on    " required
 set number relativenumber
-let mapleader=","
 set tabstop=2
 set shiftwidth=2
 set smarttab
 set expandtab
+let mapleader=","
 set noerrorbells
 set wildmenu " Show menu to move to select. Example: find 
 set history=50
@@ -71,6 +71,8 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-surround'
 Plug 'ap/vim-css-color'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
 "Theme / Interface 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -429,10 +431,17 @@ nnoremap <C-f> :call RipgrepFzf(expand("<cword>"), 1)<CR>
 inoremap <C-f> <ESC>: call RipgrepFzf(expand("<cword>"), 1)<CR>
 
 "================Mapping configuration===============
-map <C-n> :NERDTreeToggle<CR>
+map <C-t> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
 
 map <C-z> <nop>
+
+let g:VM_maps = {}
+
+let g:VM_maps["Select Cursor Down"] = '<A-Down>'
+let g:VM_maps["Select Cursor Up"] = '<A-Up>'
+let g:VM_mouse_mappings = 1
+
 
 " Mapping selecting Mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -442,6 +451,7 @@ omap <leader><tab> <plug>(fzf-maps-o)
 " Shortcuts
 nnoremap <Leader>o :Files<CR>
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>h :noh<CR>
 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
