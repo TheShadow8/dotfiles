@@ -59,8 +59,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'ryanoasis/vim-devicons'
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree' | 
+        \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+         \ Plug 'ryanoasis/vim-devicons'
+
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'ervandew/supertab'
@@ -72,6 +74,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-surround'
 Plug 'ap/vim-css-color'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'jiangmiao/auto-pairs'
 
 "Theme / Interface 
 Plug 'vim-airline/vim-airline'
@@ -156,6 +159,8 @@ nnoremap <A-Right> :bnext<CR>
 
 "NERD Tree
 let g:NERDTreeGitStatusWihFlags = 1
+" let g:NERDTreeGitStatusUseNerdFonts = 1
+
 let NERDTreeShowHidden=1
 let g:NERDTreeIgnore = ['^node_modules$']
 autocmd StdinReadPre * let s:std_in=1
@@ -196,7 +201,6 @@ highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 " coc config
 let g:coc_global_extensions = [
   \ 'coc-snippets',
-  \ 'coc-pairs',
   \ 'coc-tsserver',
   \ 'coc-eslint', 
   \ 'coc-prettier', 
@@ -431,7 +435,8 @@ nnoremap <C-f> :call RipgrepFzf(expand("<cword>"), 1)<CR>
 inoremap <C-f> <ESC>: call RipgrepFzf(expand("<cword>"), 1)<CR>
 
 "================Mapping configuration===============
-map <C-t> :NERDTreeToggle<CR>
+map <A-t> :NERDTreeToggle<CR>
+map <leader>n :NERDTreeFocus<CR>
 map <C-p> :Files<CR>
 
 map <C-z> <nop>
@@ -466,6 +471,12 @@ if get(g:, 'elite_mode')
 	nnoremap <Space><Right> :vertical resize -2<CR>
 endif
 
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
 let g:startify_lists = [
           \ { 'type': 'files',     'header': ['   Files']            },
           \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
@@ -483,4 +494,4 @@ nnoremap   <silent>   <F12>   :FloatermToggle<CR>
 tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 
 command! LyGit FloatermNew lazygit 
-nnoremap <leader>gi :FloatermNew lazygit<CR>t
+nnoremap <leader>gi :FloatermNew lazygit<CR>
