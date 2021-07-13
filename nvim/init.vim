@@ -333,7 +333,13 @@ autocmd BufWritePre *.go,*.ts,*.tsx,*.css,*.scss :call CocAction('runCommand', '
 
 function! GitStatusCount()
         if isdirectory(".git")
-                return substitute(system("git diff --numstat | wc -l"), "\n", "","g")
+                let l:count = substitute(system("git diff --numstat | wc -l"), "\n", "","g")
+                if l:count == '0'
+                        return ''
+                else        
+
+                        return l:count 
+                endif        
         else 
                 return ''
         endif        
@@ -343,7 +349,15 @@ endfunction
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-let g:airline_section_y = '!%{GitStatusCount()} '
+
+function! AirlineInit()
+  call airline#parts#define_raw('gstc', ' *%{GitStatusCount()} ')
+  let g:airline_section_b = airline#section#create(['hunks', 'branch', 'gstc'])
+endfunction
+autocmd VimEnter * call AirlineInit()
+
+
+" let g:airline_section_y = '!%{GitStatusCount()}'
 
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
