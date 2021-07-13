@@ -333,12 +333,15 @@ autocmd BufWritePre *.go,*.ts,*.tsx,*.css,*.scss :call CocAction('runCommand', '
 
 function! GitStatusCount()
         if isdirectory(".git")
-                let l:count = substitute(system("git diff --numstat | wc -l"), "\n", "","g")
-                if l:count == '0'
+                " let l:count1 = substitute(system("git diff --numstat | wc -l"),'\n','','g')
+                let l:count2 = substitute(system("git status --porcelain | wc -l"),'\n', '','g')
+                
+
+                if l:count2 == '0' 
                         return ''
                 else        
 
-                        return l:count 
+                        return l:count2 . '*'
                 endif        
         else 
                 return ''
@@ -351,8 +354,8 @@ endfunction
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 function! AirlineInit()
-  call airline#parts#define_raw('gstc', ' *%{GitStatusCount()} ')
-  let g:airline_section_b = airline#section#create(['hunks', 'branch', 'gstc'])
+  call airline#parts#define_raw('gstc', '%{GitStatusCount()}   ')
+  let g:airline_section_b = airline#section#create(['hunks', 'gstc', 'branch'])
 endfunction
 autocmd VimEnter * call AirlineInit()
 
