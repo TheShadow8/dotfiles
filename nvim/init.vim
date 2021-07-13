@@ -7,7 +7,7 @@ set tabstop=2
 set shiftwidth=2
 set smarttab
 set expandtab
-let mapleader=","
+let mapleader=";"
 set noerrorbells
 set wildmenu " Show menu to move to select. Example: find 
 set history=50
@@ -331,12 +331,20 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 autocmd BufWritePre *.go,*.ts,*.tsx,*.css,*.scss :call CocAction('runCommand', 'editor.action.organizeImport')
 
+function! GitStatusCount()
+        if isdirectory(".git")
+                return substitute(system("git diff --numstat | wc -l"), "\n", "","g")
+        else 
+                return ''
+        endif        
+endfunction
+
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+let g:airline_section_y = '!%{GitStatusCount()} '
 
-" Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
@@ -455,7 +463,7 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 " Shortcuts
 nnoremap <Leader>o :Files<CR>
-nnoremap <Leader>w :w<CR>
+nnoremap <C-s> :w<CR>
 nnoremap <Leader>h :noh<CR>
 
 " Insert mode completion
