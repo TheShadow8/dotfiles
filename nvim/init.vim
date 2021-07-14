@@ -54,6 +54,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'airblade/vim-gitgutter'
+Plug 'APZelos/blamer.nvim'
 
 " General
 Plug 'mileszs/ack.vim'
@@ -153,8 +154,9 @@ let g:spacegray_italicize_comments = 1
 " let g:airline_theme = 'nord'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-nnoremap <A-Left> :bprev<CR>
-nnoremap <A-Right> :bnext<CR>
+nnoremap <A-h> :bprev<CR>
+nnoremap <A-l> :bnext<CR>
+nnoremap <Leader>d :bdelete<CR>
 
 
 "NERD Tree
@@ -191,6 +193,9 @@ nmap [h <Plug>(GitGutterPrevHunk)
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
 highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
+" Git blamer
+let g:blamer_enabled = 1  
 
 " Devicons configuration 
 " let g:webdevicons_conceal_nerdtree_brackets = 1
@@ -341,7 +346,7 @@ function! GitStatusCount()
                         return ''
                 else        
 
-                        return l:count2 . '*'
+                        return "   [" . l:count2 . "]"
                 endif        
         else 
                 return ''
@@ -354,8 +359,8 @@ endfunction
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 function! AirlineInit()
-  call airline#parts#define_raw('gstc', '%{GitStatusCount()}   ')
-  let g:airline_section_b = airline#section#create(['hunks', 'gstc', 'branch'])
+  call airline#parts#define_raw('gstc', '%{GitStatusCount()}')
+  let g:airline_section_b = airline#section#create(['hunks', 'branch', 'gstc'])
 endfunction
 autocmd VimEnter * call AirlineInit()
 
