@@ -52,6 +52,8 @@ set colorcolumn=80
 set termguicolors     " enable true colors support (24 bit colors) let g:go_def_mapping_enabled = 0
 let loaded_netrwPlugin = 1
 
+autocmd VimEnter * silent! :lcd%:p:h
+
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -252,15 +254,19 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> ej <Plug>(coc-diagnostic-prev)
+nmap <silent> ek <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd  <Plug>(coc-definition)
@@ -395,8 +401,8 @@ nmap <space>e :CocCommand explorer<CR>
 nmap <space>f :CocCommand explorer --preset floating<CR>
 " autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 " autocmd User CocNvimInit :CocCommand explorer
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CocCommand explorer' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CocCommand explorer' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " Airline function
 function! GitStatusCount()
@@ -530,7 +536,16 @@ inoremap <C-f> <ESC>: call RipgrepFzf(expand("<cword>"), 1)<CR>
 "================Mapping configuration===============
 " map <A-t> :NERDTreeToggle<CR>
 " map <leader>n :NERDTreeFocus<CR>
-map <C-p> :GFiles<CR>
+
+function! IsFindGit()
+        if isdirectory(".git")
+               return ':GFiles --exclude-standard --others --cached'
+        else 
+                return ':Files'
+        endif        
+endfunction
+
+map <C-p> :execute IsFindGit()<CR>
 
 map <C-z> <nop>
 
