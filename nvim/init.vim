@@ -79,11 +79,11 @@ Plug 'tpope/vim-surround'
 Plug 'ap/vim-css-color'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'jiangmiao/auto-pairs'
-
 "Theme / Interface 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
+Plug 'itchyny/lightline.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'othree/html5.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -154,42 +154,12 @@ colorscheme onedark " gruvbox, codedark, ayu
 let g:molokai_original = 0
 let g:spacegray_underline_search = 1
 let g:spacegray_italicize_comments = 1
-" let g:airline_theme = 'nord'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_show = 10
 nnoremap <A-h> :bprev<CR>
 nnoremap <A-l> :bnext<CR>
 nnoremap <Leader>d :bdelete<CR>
 
-
-"NERD Tree
-" let g:NERDTreeGitStatusWihFlags = 1
-" let g:NERDTreeGitStatusUseNerdFonts = 1
-
-" let NERDTreeShowHidden=1
-" let g:NERDTreeIgnore = ['^node_modules$']
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-" " Check if NERDTree is open or active
-" function! IsNERDTreeOpen()
-"   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-" endfunction
-"
-" " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" " file, and we're not in vimdiff
-" function! SyncTree()
-"   if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-"     NERDTreeFind
-"     wincmd p
-"   endif
-" endfunction
-"
-" " Highlight currently open buffer in NERDTree
-" autocmd BufRead * call SyncTree()
-" autocmd BufWinEnter * call SyncTree()
-" command! -nargs=0 SyncTree :call SyncTree()
-" let g:plug_window = 'noautocmd vertical topleft new'
-"
 " Git Gutter
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
@@ -206,7 +176,6 @@ let g:blamer_enabled = 1
 " let g:WebDevIconsUnicodeDecorateFolderNodes = 0
 
 " Coc config
-" coc config
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-tsserver',
@@ -254,6 +223,7 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+" <Tab> to next complete item
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " Use <c-space> to trigger completion.
@@ -422,19 +392,7 @@ function! GitStatusCount()
         endif        
 endfunction
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-function! AirlineInit()
-  call airline#parts#define_raw('gstc', '%{GitStatusCount()}')
-  let g:airline_section_b = airline#section#create(['hunks', 'branch', 'gstc'])
-endfunction
-autocmd VimEnter * call AirlineInit()
-
-
-" let g:airline_section_y = '!%{GitStatusCount()}'
 
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -537,7 +495,7 @@ inoremap <C-f> <ESC>: call RipgrepFzf(expand("<cword>"), 1)<CR>
 " map <A-t> :NERDTreeToggle<CR>
 " map <leader>n :NERDTreeFocus<CR>
 
-function! IsFindGit()
+function! FindInCurrentDir()
         if isdirectory(".git")
                return ':GFiles --exclude-standard --others --cached'
         else 
@@ -545,7 +503,7 @@ function! IsFindGit()
         endif        
 endfunction
 
-map <C-p> :execute IsFindGit()<CR>
+map <C-p> :execute FindInCurrentDir()<CR>
 
 map <C-z> <nop>
 
@@ -566,6 +524,11 @@ nnoremap <Leader>o :Files<CR>
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
 vnoremap <C-s> <ESC>:w<CR>
+
+nnoremap <Leader>s :w<CR>
+inoremap <Leader>s <ESC>:w<CR>
+vnoremap <Leader>s <ESC>:w<CR>
+
 nnoremap <Leader>h :noh<CR>
 
 " Insert mode completion
@@ -605,3 +568,66 @@ tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 
 command! LyGit FloatermNew lazygit 
 nnoremap <leader>gi :FloatermNew lazygit<CR>
+
+" Lightline config
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+function! LightlineReadonly()
+  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
+
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
+" Airline function
+function! GitStatusCount()
+        if isdirectory(".git")
+                " let l:count1 = substitute(system("git diff --numstat | wc -l"),'\n','','g')
+                let l:count2 = substitute(system("git status --porcelain | wc -l"),'\n', '','g')
+                if l:count2 == '0' 
+                        return ''
+                else        
+                        return "   [" . l:count2 . "]"
+                endif        
+        else 
+                return ''
+        endif        
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'deus',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gst','gitbranch','gstc'], 
+      \             [ 'filename', 'modified' ],
+      \             ['cocstatus', 'currentfunction'] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'gitbranch': 'FugitiveHead',
+      \   'readonly': 'LightlineReadonly',
+      \   'gst': 'GitStatus',
+      \   'gstc': 'GitStatusCount',
+        \ },
+      \ }
+
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" let g:airline_theme = 'nord'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+" function! AirlineInit()
+  " call airline#parts#define_raw('gstc', '%{GitStatusCount()}')
+  " call airline#parts#define_raw('ccf', '%{CocCurrentFunction()}')
+  " let g:airline_section_b = airline#section#create(['hunks', 'branch', 'gstc', ''])
+" endfunction
+" autocmd VimEnter * call AirlineInit()
+
