@@ -1,0 +1,65 @@
+{
+  "suggest.noselect": false,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  },
+  "go.goplsOptions": {
+    "buildFlags": ["-tags=wireinject"]
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "json",
+    "typescript",
+    "typescriptreact",
+    "jsx",
+    "typescript.tsx",
+    "typescript.jsx",
+    "javascript",
+    "go"
+  ],
+  "prettier.singleQuote": true,
+  "coc.preferences.jumpCommand": "edit",
+  "diagnostic.maxWindowHeight": 25,
+  "html.filetypes": ["html", "handlebars", "xhtml"],
+  "git.enableGlobalStatus": false,
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "it.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "diagnostic.warningSign": ">>",
+  "git.enableGutters": true,
+  "coc.source.issues.enable": false,
+  "coc.source.word.filetypes": ["text", "html", "markdown"],
+  "suggest.detailMaxLength": 200,
+  "list.insertMappings": {
+    "<C-s>": "action:vsplit",
+    "<C-w>": "command:wincmd k",
+    "<C-v>": "eval:@@"
+  },
+  "list.source.grep.args": ["-S"],
+  "explorer.width": 30,
+  "explorer.buffer.root.template": "[icon & 1] OPEN EDITORS",
+  "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
+  "explorer.focus": false,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.file.reveal.auto": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.keyMappings.global": {
+    "<cr>": [
+      "wait",
+      "expandable?",
+      ["expanded?", "collapse", "expand"],
+      "open"
+    ],
+    "v": "open:vsplit"
+  }
+}
+
