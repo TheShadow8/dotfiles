@@ -50,6 +50,8 @@ let loaded_netrwPlugin = 1
 " configure title to look like: Vim /path/to/file
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
 
+let mapleader=";"
+
 autocmd VimEnter * silent! :lcd%:p:h
 
 " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'cd '.argv()[0] | endif
@@ -60,17 +62,23 @@ source $HOME/.config/nvim/plugs.vim
 source $HOME/.config/nvim/nerdtree.vim
 source $HOME/.config/nvim/fzf.vim
 
+" Theme
+set background=dark
+let g:floaterm_width=0.9
+let g:floaterm_height=0.9
+let ayucolor="mirage" " dark, mirage, light for mirage version of theme
+colorscheme dracula " gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8
+
+let g:molokai_original = 0
+" let g:spacegray_underline_search = 1
+" let g:spacegray_italicize_comments = 1
 
 "============Configuration===========================================
-" Re-map
-" command maps{{{
-" cnoremap jk <c-c>
-"}}}
 
-let mapleader=";"
+cnoremap jk <c-c>
+
 inoremap jj <ESC>
 inoremap <leader>; <Esc>$a
-let g:go_def_mapping_enabled = 0
 inoremap <leader>dd <Esc>ddi
 inoremap <leader>> <esc>>>a
 inoremap <leader>< <esc><<a
@@ -85,21 +93,6 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-set background=dark
-let g:floaterm_width=0.9
-let g:floaterm_height=0.9
-let ayucolor="mirage" " dark, mirage, light for mirage version of theme
-" colorscheme dracula " gruvbox, codedark, ayu
-" colorscheme molokai " gruvbox, codedark, ayu
-colorscheme gruvbox8 " gruvbox, codedark, ayu
-" colorscheme ayu " gruvbox, codedark, ayu
-" colorscheme codedark  " gruvbox, codedark, ayu
-
-let g:molokai_original = 0
-let g:spacegray_underline_search = 1
-let g:spacegray_italicize_comments = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
 nnoremap <A-l> :bnext<CR>
 nnoremap <A-h> :bprev<CR>
 nnoremap <Leader>d :bdelete<CR>
@@ -113,16 +106,10 @@ highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
 " Indent line
 let g:indentLine_enabled = 0
+nnoremap <Leader>i :IndentLinesToggle<CR>
 
 " Git blamer
-let g:blamer_enabled = 1  
-
-" Devicons configuration 
-" let g:webdevicons_conceal_nerdtree_brackets = 1
-" let g:WebDevgruvboxrdTreeAfterGlyphPadding = ''
-" let g:WebDevIconsUnicodeDecorateFolderNodes = 0
-
-  
+nnoremap <Leader>b :BlamerToggle<CR>
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -171,7 +158,6 @@ vnoremap <Leader>s <ESC>:w<CR>
 
 nnoremap <Leader>h :noh<CR>
 
-map <Leader>i :IndentLinesToggle<CR>
 
 map <Leader>g :Git 
 " Insert mode completion
@@ -229,4 +215,6 @@ function! GitStatusCount()
                 return ''
         endif        
 endfunction
+
+inoremap <silent><expr> <CR> compe#confirm('<CR>')
 

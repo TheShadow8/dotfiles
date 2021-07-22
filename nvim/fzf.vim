@@ -74,3 +74,6 @@ vnoremap <C-f> :call RipgrepFzf(Get_visual_selection(), 0)<CR>
 nnoremap <C-f> :call RipgrepFzf(expand("<cword>"), 0)<CR>
 inoremap <C-f> <ESC>: call RipgrepFzf(expand("<cword>"), 0)<CR>
 
+vnoremap <Leader>f :call RipgrepFzf("", 0)<CR>
+nnoremap <Leader>f :call RipgrepFzf("", 0)<CR>
+inoremap <Leader>f <ESC>: call RipgrepFzf("", 0)<CR>

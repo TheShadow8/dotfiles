@@ -20,11 +20,11 @@ function! SyncTree()
   endif
 endfunction
 
-" Highlight currently open buffer in NERDTree
 autocmd BufRead * call SyncTree()
 autocmd BufWinEnter * call SyncTree()
 command! -nargs=0 SyncTree :call SyncTree()
+
 let g:plug_window = 'noautocmd vertical topleft new'
 
 map <A-t> :NERDTreeToggle<CR>
-map <leader>n :NERDTreeFocus<CR>
+map <Leader>n :NERDTreeFocus<CR>
