@@ -46,7 +46,7 @@ set updatetime=300
 set smartcase " Auto switch to case sensitive when Upper-case use (exp: Search ...)
 set colorcolumn=80
 set termguicolors     " enable true colors support (24 bit colors) let g:go_def_mapping_enabled = 0
-let loaded_netrwPlugin = 1
+" let loaded_netrwPlugin = 1
 " configure title to look like: Vim /path/to/file
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
 
@@ -54,36 +54,48 @@ let mapleader=";"
 
 autocmd VimEnter * silent! :lcd%:p:h
 
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'cd '.argv()[0] | exe 'Startify' | endif
 
 "Import files
-
 source $HOME/.config/nvim/plugs.vim
-source $HOME/.config/nvim/nerdtree.vim
 source $HOME/.config/nvim/fzf.vim
+source $HOME/.config/nvim/nerdtree.vim
+
+
 
 " Theme
 set background=dark
 let g:floaterm_width=0.9
 let g:floaterm_height=0.9
 let ayucolor="mirage" " dark, mirage, light for mirage version of theme
-colorscheme dracula " gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8
+colorscheme sonokai " gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8
 
-let g:molokai_original = 0
+" let g:molokai_original = 0
 " let g:spacegray_underline_search = 1
 " let g:spacegray_italicize_comments = 1
+
+" highlight Normal guibg=black guifg=white
+
+
 
 "============Configuration===========================================
 
 cnoremap jk <c-c>
 
 inoremap jj <ESC>
-inoremap <leader>; <Esc>$a
+inoremap <leader>; <Right>
 inoremap <leader>dd <Esc>ddi
 inoremap <leader>> <esc>>>a
 inoremap <leader>< <esc><<a
 vnoremap < <gv
 vnoremap > >gv
+
+" Make dir, file from current dir
+nnoremap <Leader>w :! mkdir %:h/
+nnoremap <Leader>e :e %:h/
+
+inoremap <Leader>w <ESC>:! mkdir %:h/
+inoremap <Leader>e <ESC>:e %:h/
 
 " Move a line down/up
 nnoremap <A-j> :m .+1<CR>==
@@ -96,6 +108,8 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 nnoremap <A-l> :bnext<CR>
 nnoremap <A-h> :bprev<CR>
 nnoremap <Leader>d :bdelete<CR>
+nnoremap <Leader>c :copen<CR>
+nnoremap <Leader>cc :cclose<CR>
 
 " Git Gutter
 nmap ]h <Plug>(GitGutterNextHunk)
@@ -119,6 +133,9 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+" Ranger
+nmap <space>r :RnvimrToggle<CR>
 
 "================Mapping configuration===============
 
@@ -178,7 +195,7 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 " Startify
-let g:startify_change_to_dir = 0
+let g:startify_change_to_dir = 1
 let g:startify_change_to_vcs_root = 1
 let g:startify_lists = [
           \ { 'type': 'files',     'header': ['   Files']            },
@@ -188,6 +205,10 @@ let g:startify_lists = [
           \ ]
 
 " Floaterm
+
+hi Floaterm guibg=#424242
+hi FloatermBorder guibg=#424242
+
 nnoremap   <silent>   <F7>    :FloatermNew<CR>
 tnoremap   <silent>   <F7>    <C-\><C-n>:FloatermNew<CR>
 nnoremap   <silent>   <F8>    :FloatermPrev<CR>
@@ -216,5 +237,7 @@ function! GitStatusCount()
         endif        
 endfunction
 
-inoremap <silent><expr> <CR> compe#confirm('<CR>')
-
+" inoremap <silent><expr> <CR> compe#confirm('<CR>')
+" inoremap <silent><expr> <CR> compe#confirm(luaeval("require 'nvim-autopairs'.autopairs_cr()"))
+let delimitMate_expand_space = 1
+inoremap <silent><expr> <CR>      compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })

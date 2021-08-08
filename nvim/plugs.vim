@@ -1,19 +1,21 @@
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+" Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " General
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree' | 
         \ Plug 'Xuyuanp/nerdtree-git-plugin' 
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-dispatch'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 "Theme / Interface 
 Plug 'ap/vim-buftabline'
@@ -26,6 +28,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'lifepillar/vim-gruvbox8'
+Plug 'sainnhe/sonokai'
 
 " Session
 Plug 'mhinz/vim-startify'
@@ -49,7 +52,11 @@ if has("nvim")
   Plug 'rafamadriz/friendly-snippets'
   Plug 'mhartington/formatter.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  " Plug 'windwp/nvim-autopairs'
   Plug 'kyazdani42/nvim-web-devicons'
+  " Plug 'nvim-lua/popup.nvim'
+  " Plug 'nvim-lua/plenary.nvim'
+  " Plug 'nvim-telescope/telescope.nvim'
 endif  
 
 call plug#end()

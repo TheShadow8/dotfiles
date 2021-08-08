@@ -10,7 +10,7 @@ let g:fzf_tags_command = 'ctags -R'
 " Border color
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline --preview "bat --theme="gruvbox-light" --style=numbers,changes --color always"'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline --preview "bat --color=always --style=numbers,changes"'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 
 " Customize fzf colors to match your color scheme
