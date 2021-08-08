@@ -18,7 +18,7 @@ require'compe'.setup {
     path = true;
     buffer = true;
     calc = true;
-    -- vsnip = true;
+    vsnip = true;
     nvim_lsp = true;
     nvim_lua = true;
     spell = true;
@@ -38,6 +38,7 @@ local check_back_space = function()
     else
         return false
     end
+
 end
 
 local t = function(str)
@@ -79,3 +80,10 @@ vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
+-- require('nvim-autopairs').setup()
+--
+-- require("nvim-autopairs.completion.compe").setup({
+--   map_cr = true, --  map <CR> on insert mode
+--   map_complete = true -- it will auto insert `(` after select function or method item
+-- })
+--
