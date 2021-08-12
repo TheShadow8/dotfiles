@@ -98,14 +98,17 @@ nvim_lsp.flow.setup {
 }
 
 nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact" },
+  on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        on_attach(client)
+      end,
+  filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   capabilities = capabilities,
 }
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc', 'go' },
+  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown' , 'go' },
   init_options = {
     linters = {
       eslint = {
@@ -138,7 +141,7 @@ nvim_lsp.diagnosticls.setup {
     formatters = {
       prettier = {
         command = 'prettier',
-        args = { '--stdin-filepath', '%filename' }
+        args = {'--stdin-filepath', '%filepath' }
       }
     },
     formatFiletypes = {
@@ -157,8 +160,7 @@ nvim_lsp.diagnosticls.setup {
 }
 
 
-nvim_lsp.gopls.setup{}
-
+-- nvim_lsp.gopls.setup{}
 
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -172,6 +174,49 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+-- require'lspinstall'.setup() -- important
+--
+-- local servers = require'lspinstall'.installed_servers()
+-- for _, server in pairs(servers) do
+--   require'lspconfig'[server].setup{}
+-- end
 
+-- config that activates keymaps and enables snippet support
+local function make_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return {
+    -- enable snippet support
+    capabilities = capabilities,
+    -- map buffer local keybindings when the language server attaches
+    on_attach = on_attach,
+  }
+end
+
+-- lsp-install
+local function setup_servers()
+  require'lspinstall'.setup()
+
+  -- get all installed servers
+  local servers = require'lspinstall'.installed_servers()
+  -- ... and add manually installed servers
+
+  for _, server in pairs(servers) do
+    local config = make_config()
+
+    -- language specific config
+ 
+
+    require'lspconfig'[server].setup(config)
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
 
 EOF

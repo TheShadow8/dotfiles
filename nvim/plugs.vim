@@ -10,8 +10,11 @@ Plug 'preservim/nerdtree' |
         \ Plug 'Xuyuanp/nerdtree-git-plugin' 
 " Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-dispatch'
-Plug 'tomtom/tcomment_vim'
+" Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
+" Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-surround'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Plug 'jiangmiao/auto-pairs'
@@ -53,6 +56,7 @@ if has("nvim")
   Plug 'mhartington/formatter.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   " Plug 'windwp/nvim-autopairs'
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring'
   Plug 'kyazdani42/nvim-web-devicons'
   " Plug 'nvim-lua/popup.nvim'
   " Plug 'nvim-lua/plenary.nvim'

@@ -61,8 +61,6 @@ source $HOME/.config/nvim/plugs.vim
 source $HOME/.config/nvim/fzf.vim
 source $HOME/.config/nvim/nerdtree.vim
 
-
-
 " Theme
 set background=dark
 let g:floaterm_width=0.9
@@ -96,6 +94,11 @@ nnoremap <Leader>e :e %:h/
 
 inoremap <Leader>w <ESC>:! mkdir %:h/
 inoremap <Leader>e <ESC>:e %:h/
+
+" Map commentary
+vmap <C-_> gc
+nmap <C-_> gcc
+imap <C-_> <Esc>VgcA
 
 " Move a line down/up
 nnoremap <A-j> :m .+1<CR>==
@@ -187,6 +190,11 @@ nnoremap <Space><Up>    :resize +2<CR>
 nnoremap <Space><Down>  :resize -2<CR>
 nnoremap <Space><Left>  :vertical resize +2<CR>
 nnoremap <Space><Right> :vertical resize -2<CR>
+
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>

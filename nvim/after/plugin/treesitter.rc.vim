@@ -5,6 +5,9 @@ endif
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+   context_commentstring = {
+   enable = true
+  },
   highlight = {
     enable = true,
     disable = {},
@@ -22,7 +25,10 @@ require'nvim-treesitter.configs'.setup {
     "yaml",
     "swift",
     "html",
-    "scss"
+    "scss",
+    "go",
+    "javascript",
+    "typescript"
   },
 }
 
