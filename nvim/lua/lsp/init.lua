@@ -1,14 +1,7 @@
-if !exists('g:lspconfig')
-  finish
-endif
-
-lua << EOF
---vim.lsp.set_log_level("debug")
-EOF
-
-lua << EOF
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
+require('lsp/lsp-saga')
+require('lsp/lsp-colors')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -106,61 +99,116 @@ nvim_lsp.tsserver.setup {
   capabilities = capabilities,
 }
 
-nvim_lsp.diagnosticls.setup {
-  on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown' , 'go' },
-  init_options = {
-    linters = {
-      eslint = {
-        command = 'eslint_d',
-        rootPatterns = {".eslintrc.js", "package.json"},
-        debounce = 100,
-        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json'},
-        sourceName = 'eslint',
-        parseJson = {
-          errorsRoot = '[0].messages',
-          line = 'line',
-          column = 'column',
-          endLine = 'endLine',
-          endColumn = 'endColumn',
-          message = '[eslint] ${message} [${ruleId}]',
-          security = 'severity'
-        },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning'
-        }
-      },
-    },
-    filetypes = {
-      javascript = 'eslint',
-      javascriptreact = 'eslint',
-      typescript = 'eslint',
-      typescriptreact = 'eslint',
-    },
-    formatters = {
-      prettier = {
-        command = 'prettier',
-        args = {'--stdin-filepath', '%filepath' }
-      }
-    },
-    formatFiletypes = {
-      css = 'prettier',
-      javascript = 'prettier',
-      javascriptreact = 'prettier',
-      json = 'prettier',
-      scss = 'prettier',
-      less = 'prettier',
-      typescript = 'prettier',
-      typescriptreact = 'prettier',
-      json = 'prettier',
-      markdown = 'prettier',
-    }
-  }
+-- nvim_lsp.diagnosticls.setup {
+--   on_attach = on_attach,
+--   filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown' , 'go' },
+--   init_options = {
+--     linters = {
+--       eslint = {
+--         command = 'eslint_d',
+--         rootPatterns = {".eslintrc.js", "package.json"},
+--         debounce = 100,
+--         args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json'},
+--         sourceName = 'eslint',
+--         parseJson = {
+--           errorsRoot = '[0].messages',
+--           line = 'line',
+--           column = 'column',
+--           endLine = 'endLine',
+--           endColumn = 'endColumn',
+--           message = '[eslint] ${message} [${ruleId}]',
+--           security = 'severity'
+--         },
+--         securities = {
+--           [2] = 'error',
+--           [1] = 'warning'
+--         }
+--       },
+--     },
+--     filetypes = {
+--       javascript = 'eslint',
+--       javascriptreact = 'eslint',
+--       typescript = 'eslint',
+--       typescriptreact = 'eslint',
+--     },
+--     formatters = {
+--       prettier = {
+--         command = 'prettier',
+--         args = {'--stdin-filepath', '%filepath' }
+--       }
+--     },
+--     formatFiletypes = {
+--       css = 'prettier',
+--       javascript = 'prettier',
+--       javascriptreact = 'prettier',
+--       json = 'prettier',
+--       scss = 'prettier',
+--       less = 'prettier',
+--       typescript = 'prettier',
+--       typescriptreact = 'prettier',
+--       json = 'prettier',
+--       markdown = 'prettier',
+--     }
+--   }
+-- }
+
+local prettier =  {
+  formatCommand = 'prettier --find-config-path --stdin-filepath ${INPUT}',
+  formatStdin = true
 }
 
+local eslint = {
+  lintCommand = 'eslint_d --stdin --stdin-filename ${INPUT} -f unix',
+  lintStdin = true,
+  lintIgnoreExitCode = true
+}
 
--- nvim_lsp.gopls.setup{}
+local efm_config = os.getenv('HOME') .. '/.config/efm-langserver/config.yaml'
+local efm_log_dir = '/tmp/'
+local efm_root_markers = { 'package.json', '.git/' }
+local efm_languages = {
+  yaml = { prettier },
+  json = { prettier },
+  markdown = { prettier },
+  javascript = { eslint, prettier },
+  javascriptreact = { eslint, prettier },
+  typescript = { eslint, prettier },
+  typescriptreact = { eslint, prettier },
+  css = { prettier },
+  scss = { prettier },
+  sass = { prettier },
+  less = { prettier },
+  json = { prettier },
+  graphql = { prettier },
+  vue = { prettier },
+  html = { prettier }
+}
+
+nvim_lsp.efm.setup({
+  cmd = {
+    "efm-langserver",
+    "-c",
+    efm_config,
+    "-logfile",
+    efm_log_dir .. "efm.log"
+  },
+  filetype = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact'
+  },
+  on_attach = on_attach,
+  root_dir = nvim_lsp.util.root_pattern(unpack(efm_root_markers)),
+  init_options = {
+    documentFormatting = true
+  },
+  settings = {
+    rootMarkers = efm_root_markers,
+    languages = efm_languages
+  }
+})
+
 
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -218,5 +266,3 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
-
-EOF

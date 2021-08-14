@@ -1,28 +1,40 @@
-if !exists('g:loaded_defx') | finish | endif
+map <Space>t :Defx `getcwd()` -no-focus -search=`expand('%:p')`<CR> 
+map <A-t> :Defx -ignored-files=""<CR> 
 
-" Define mappings
-"cnoreabbrev sf Defx -listed -new
-"      \ -columns=indent:mark:icon:icons:filename:git:size
-"      \ -buffer-name=tab`tabpagenr()`<CR>
-nnoremap <silent>sf :<C-u>Defx -listed -resume
-      \ -columns=indent:mark:icon:icons:filename:git:size
-      \ -buffer-name=tab`tabpagenr()`
-      \ `expand('%:p:h')` -search=`expand('%:p')`<CR>
-nnoremap <silent>fi :<C-u>Defx -new `expand('%:p:h')` -search=`expand('%:p')`<CR>
+function! s:defx_toggle_tree_or_open_file() abort
+  if defx#is_directory()
+    return defx#do_action('open_or_close_tree')
+  else
+    return defx#do_action('drop')
+  endif
+endfunction
+
+function! s:defx_cd_or_open_file() abort
+  if defx#is_directory()
+    return defx#do_action('open_directory')
+  else
+    return defx#do_action('drop')
+  endif
+endfunction
+
+autocmd BufWritePost * call defx#redraw()
 
 autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
 	  " Define mappings
-	  nnoremap <silent><buffer><expr> <CR>
-	  \ defx#do_action('open')
+
+  nnoremap <silent><buffer><expr> <2-LeftMouse> <sid>defx_toggle_tree_or_open_file()
+  nnoremap <silent><buffer><expr> <CR> <sid>defx_toggle_tree_or_open_file()
+  nnoremap <silent><buffer><expr> l <sid>defx_toggle_tree_or_open_file()
+  nnoremap <silent><buffer><expr> L <sid>defx_cd_or_open_file()
+
+
 	  nnoremap <silent><buffer><expr> c
 	  \ defx#do_action('copy')
 	  nnoremap <silent><buffer><expr> m
 	  \ defx#do_action('move')
 	  nnoremap <silent><buffer><expr> p
 	  \ defx#do_action('paste')
-	  nnoremap <silent><buffer><expr> l
-	  \ defx#do_action('open')
 	  nnoremap <silent><buffer><expr> E
 	  \ defx#do_action('open', 'vsplit')
 	  nnoremap <silent><buffer><expr> P
@@ -54,7 +66,7 @@ autocmd FileType defx call s:defx_my_settings()
 	  \ defx#do_action('toggle_ignored_files')
 	  nnoremap <silent><buffer><expr> ;
 	  \ defx#do_action('repeat')
-	  nnoremap <silent><buffer><expr> h
+	  nnoremap <silent><buffer><expr> H
 	  \ defx#do_action('cd', ['..'])
 	  nnoremap <silent><buffer><expr> ~
 	  \ defx#do_action('cd')
@@ -68,7 +80,7 @@ autocmd FileType defx call s:defx_my_settings()
 	  \ line('.') == line('$') ? 'gg' : 'j'
 	  nnoremap <silent><buffer><expr> k
 	  \ line('.') == 1 ? 'G' : 'k'
-	  nnoremap <silent><buffer><expr> <C-l>
+	  nnoremap <silent><buffer><expr> <C-r>
 	  \ defx#do_action('redraw')
 	  nnoremap <silent><buffer><expr> <C-g>
 	  \ defx#do_action('print')
@@ -76,11 +88,31 @@ autocmd FileType defx call s:defx_my_settings()
 	  \ defx#do_action('change_vim_cwd')
 	endfunction
 
+
+call defx#custom#option('_', {
+      \ 'winwidth': 30,
+      \ 'split': 'vertical',
+      \ 'direction': 'topleft',
+      \ 'show_ignored_files': 1,
+      \ 'ignored_files': "",
+      \ 'buffer_name': 'defxplorer',
+      \ 'toggle': 1,
+      \ 'resume': 1,
+      \ 'columns' : 'indent:mark:icon:filename:git'
+      \ })
+
+
 call defx#custom#column('icon', {
       \ 'directory_icon': '▸',
-      \ 'opened_icon': '▾',
+      \ 'opened_icon': '▾ ',
       \ 'root_icon': ' ',
       \ })
+
+call defx#custom#column('filename', {
+      \ 'min_width': 5,
+      \ 'max_width': 20,
+      \ })
+
 call defx#custom#column('git', 'indicators', {
   \ 'Modified'  : 'M',
   \ 'Staged'    : '✚',
