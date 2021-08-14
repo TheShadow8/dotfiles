@@ -189,7 +189,7 @@ vnoremap <Leader>s <ESC>:w<CR>
 nnoremap <Leader>h :noh<CR>
 
 
-map <Leader>g :Git 
+map <Leader>G :Git 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
