@@ -1,5 +1,2 @@
-
-require ("plugins")
-require ("lsp")
-
-
+require("plugins")
+require("lsp")

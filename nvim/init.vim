@@ -59,12 +59,11 @@ autocmd VimEnter * silent! :lcd%:p:h
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'cd '.argv()[0] | exe 'Startify' | endif
 
 "Import files
-source $HOME/.config/nvim/plugs.vim
+" source $HOME/.config/nvim/plugs.vim
 " source $HOME/.config/nvim/fzf.vim
-source $HOME/.config/nvim/defx.vim
 " source $HOME/.config/nvim/nerdtree.vim
+source $HOME/.config/nvim/defx.vim
 :lua require('')
-" :lua require('paq-nvim')
 
 
 
