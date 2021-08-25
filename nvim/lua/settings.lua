@@ -41,14 +41,15 @@ for key, val in pairs(
         completeopt = "menuone,noselect",
         laststatus = 2, -- Always display the status line
         background = "dark",
-        signcolumn = "number"
+        signcolumn = "number",
+        scrolloff = 999
     }
 ) do
     vim.o[key] = val
 end
 
 vim.cmd("filetype plugin indent on")
-vim.cmd("colorscheme sonokai") -- gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8, sonokai
+vim.cmd("colorscheme gruvbox8") -- gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8, sonokai
 
 vim.cmd("hi GitGutterAdd  guifg=#009900 ctermfg=2")
 vim.cmd("hi GitGutterChange guifg=#bbbb00 ctermfg=3")
@@ -71,7 +72,7 @@ vim.g.startify_lists = {
     {type = "sessions", header = {"   Sessions"}},
     {type = "bookmarks", header = {"   Bookmarks"}}
 }
-
+vim.g.delimitMate_expand_cr = 1
 vim.g.delimitMate_expand_space = 1
 
 vim.g.VM_maps = {
@@ -88,7 +89,6 @@ vim.api.nvim_command [[autocmd BufRead,BufNewFile *.ejs setfiletype html]]
 --- ### Mapping
 local options = {noremap = true}
 local options1 = {noremap = true, silent = true}
-local options2 = {noremap = true, silent = true, expr = true}
 
 -- General
 vim.api.nvim_set_keymap("c", "jk", "<C-C>", options)
@@ -166,12 +166,10 @@ vim.api.nvim_set_keymap("n", "<Up>", ':echo "Use k"<CR>', options)
 vim.api.nvim_set_keymap("n", "<Down>", ':echo "Use j"<CR>', options)
 
 vim.api.nvim_set_keymap("n", "<F7>", ":FloatermNew<CR>", options1)
-vim.api.nvim_set_keymap("t", "<F7>", "<C-\\><C-n>:FloatermNw<CR>", options1)
+vim.api.nvim_set_keymap("t", "<F7>", "<C-\\><C-n>:FloatermNew<CR>", options1)
 vim.api.nvim_set_keymap("n", "<F8>", ":FloatermPrev<CR>", options1)
 vim.api.nvim_set_keymap("t", "<F8>", "<C-\\><C-n>:FloatermPrev<CR>", options1)
 vim.api.nvim_set_keymap("n", "<F9>", ":FloatermNext<CR>", options1)
 vim.api.nvim_set_keymap("t", "<F9>", "<C-\\><C-n>:FloatermNext<CR>", options1)
 vim.api.nvim_set_keymap("n", "<F12>", ":FloatermToggle<CR>", options1)
 vim.api.nvim_set_keymap("t", "<F12>", "<C-\\><C-n>:FloatermToggle<CR>", options1)
-
-vim.api.nvim_set_keymap("i", "<CR>", 'compe#confirm({ "keys": "\\<Plug>delimitMateCR", "mode": "" })', options2)

@@ -46,9 +46,18 @@ require "paq" {
     "kabouzeid/nvim-lspinstall",
     "glepnir/lspsaga.nvim",
     "folke/lsp-colors.nvim",
-    "hrsh7th/nvim-compe",
+    -- "hrsh7th/nvim-compe",
+
+    -- For auto completion
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-buffer",
     "hrsh7th/vim-vsnip",
+    "hrsh7th/cmp-vsnip",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-path",
     "rafamadriz/friendly-snippets",
+    "onsails/lspkind-nvim",
+    --
     "mhartington/formatter.nvim",
     {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -59,11 +68,12 @@ require "paq" {
     "nvim-telescope/telescope.nvim"
 }
 
+require("plugins/web-devicons")
+require("plugins/lsp-kind")
 require("plugins/nvim-tree")
 require("plugins/bufferline")
-require("plugins/completion")
+require("plugins/cmp")
 require("plugins/formatter")
 require("plugins/treesitter")
-require("plugins/web-devicons")
 require("plugins/lualine")
 require("plugins/telescope")
