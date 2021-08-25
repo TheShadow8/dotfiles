@@ -50,7 +50,7 @@ local options = {
 }
 
 vim.api.nvim_set_keymap("n", "<Leader>B", '<cmd>lua require("telescope.builtin").file_browser()<CR>', options)
-vim.api.nvim_set_keymap("n", "<Leader>b", '<cmd>lua require("telescope.builtin").buffers()<CR>', options)
+vim.api.nvim_set_keymap("n", "<Leader>bb", '<cmd>lua require("telescope.builtin").buffers()<CR>', options)
 
 vim.api.nvim_set_keymap("n", "<C-p>", '<cmd>lua require("telescope.builtin").find_files({ hidden=true })<CR>', options)
 
@@ -58,7 +58,7 @@ vim.api.nvim_set_keymap("n", "<Leader>f", '<cmd>lua require("telescope.builtin")
 vim.api.nvim_set_keymap("n", "<Leader>F", '<cmd>lua require("telescope.builtin").grep_string()<CR>', options)
 vim.api.nvim_set_keymap(
     "n",
-    "<Leader>fb",
+    "<Leader>bf",
     '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
     options
 )

@@ -17,7 +17,7 @@ require "paq" {
     "Raimondi/delimitMate",
     "Yggdroot/indentLine",
     -- Theme / Interface
-    "ap/vim-buftabline",
+    -- "ap/vim-buftabline",
     {"styled-components/vim-styled-components", branch = "main"},
     "morhetz/gruvbox",
     "mhartington/oceanic-next",
@@ -37,8 +37,10 @@ require "paq" {
     "savq/paq-nvim",
     "APZelos/blamer.nvim",
     "hoob3rt/lualine.nvim",
-    "kristijanhusak/defx-git",
-    "kristijanhusak/defx-icons",
+    "kyazdani42/nvim-tree.lua",
+    "akinsho/bufferline.nvim",
+    -- "kristijanhusak/defx-git",
+    -- "kristijanhusak/defx-icons",
     -- {"Shougo/defx.nvim",  run="UpdateRemotePlugins" };
     "neovim/nvim-lspconfig",
     "kabouzeid/nvim-lspinstall",
@@ -57,6 +59,8 @@ require "paq" {
     "nvim-telescope/telescope.nvim"
 }
 
+require("plugins/nvim-tree")
+require("plugins/bufferline")
 require("plugins/completion")
 require("plugins/formatter")
 require("plugins/treesitter")

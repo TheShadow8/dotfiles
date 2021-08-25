@@ -4,6 +4,16 @@ if (not status) then
     return
 end
 
+local function getStatusCount()
+    if (vim.fn.isdirectory(".git") == 1) then
+        local count = vim.fn.substitute(vim.fn.system("git status --porcelain | wc -l"), "\n", "", "g")
+        if count == "0" then
+            return ""
+        end
+        return count .. "*"
+    end
+end
+
 lualine.setup {
     options = {
         icons_enabled = true,
@@ -14,7 +24,7 @@ lualine.setup {
     },
     sections = {
         lualine_a = {"mode"},
-        lualine_b = {"branch", "diff", "GitStatusCount"},
+        lualine_b = {"branch", "diff", getStatusCount},
         lualine_c = {"filename"},
         lualine_x = {
             {"diagnostics", sources = {"nvim_lsp"}, symbols = {error = " ", warn = " ", info = " ", hint = " "}},

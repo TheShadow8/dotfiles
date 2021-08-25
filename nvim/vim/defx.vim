@@ -80,7 +80,7 @@ autocmd FileType defx call s:defx_my_settings()
 	  \ line('.') == line('$') ? 'gg' : 'j'
 	  nnoremap <silent><buffer><expr> k
 	  \ line('.') == 1 ? 'G' : 'k'
-	  nnoremap <silent><buffer><expr> <C-r>
+	  nnoremap <silent><buffer><expr> R
 	  \ defx#do_action('redraw')
 	  nnoremap <silent><buffer><expr> <C-g>
 	  \ defx#do_action('print')
@@ -110,7 +110,7 @@ call defx#custom#column('icon', {
 
 call defx#custom#column('filename', {
       \ 'min_width': 5,
-      \ 'max_width': 20,
+      \ 'max_width': 50,
       \ })
 
 call defx#custom#column('git', 'indicators', {

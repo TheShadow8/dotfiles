@@ -121,7 +121,7 @@ local luafmt = {
 
 local efm_config = os.getenv("HOME") .. "/.config/efm-langserver/config.yaml"
 local efm_log_dir = "/tmp/"
-local efm_root_markers = {"package.json", ".git/", ".zshrc"}
+local efm_root_markers = {"package.json", ".git", ".zshrc"}
 local efm_languages = {
     yaml = {prettier},
     json = {prettier},
@@ -190,6 +190,29 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 -- end
 
 -- config that activates keymaps and enables snippet support
+
+-- Configure lua language server for neovim development
+local lua_settings = {
+    Lua = {
+        runtime = {
+            -- LuaJIT in the case of Neovim
+            version = "LuaJIT",
+            path = vim.split(package.path, ";")
+        },
+        diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = {"vim"}
+        },
+        workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = {
+                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+            }
+        }
+    }
+}
+
 local function make_config()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -213,6 +236,9 @@ local function setup_servers()
         local config = make_config()
 
         -- language specific config
+        if server == "lua" then
+            config.settings = lua_settings
+        end
 
         require "lspconfig"[server].setup(config)
     end
