@@ -14,7 +14,6 @@ require "paq" {
     "tpope/vim-commentary",
     "tpope/vim-surround",
     {"mg979/vim-visual-multi", branch = "master"},
-    "Raimondi/delimitMate",
     "Yggdroot/indentLine",
     -- Theme / Interface
     -- "ap/vim-buftabline",
@@ -39,6 +38,7 @@ require "paq" {
     "hoob3rt/lualine.nvim",
     "kyazdani42/nvim-tree.lua",
     "akinsho/bufferline.nvim",
+    "windwp/nvim-autopairs",
     -- "kristijanhusak/defx-git",
     -- "kristijanhusak/defx-icons",
     -- {"Shougo/defx.nvim",  run="UpdateRemotePlugins" };
@@ -69,6 +69,7 @@ require "paq" {
 }
 
 require("plugins/web-devicons")
+require("plugins/autopairs")
 require("plugins/lsp-kind")
 require("plugins/nvim-tree")
 require("plugins/bufferline")

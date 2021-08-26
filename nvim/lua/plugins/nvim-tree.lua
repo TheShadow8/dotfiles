@@ -5,12 +5,12 @@ g.nvim_tree_width = 40
 g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
 g.nvim_tree_gitignore = 1
 g.nvim_tree_auto_open = 1
-g.nvim_tree_auto_close = 1
+g.nvim_tree_auto_close = 0
 g.nvim_tree_auto_ignore_ft = {"startify", "dashboard"}
 g.nvim_tree_quit_on_open = 1
 g.nvim_tree_follow = 1
 g.nvim_tree_indent_markers = 1
-g.nvim_tree_hide_dotfiles = 1
+g.nvim_tree_hide_dotfiles = 0
 g.nvim_tree_git_hl = 1
 g.nvim_tree_highlight_opened_files = 1
 g.nvim_tree_root_folder_modifier = ":~"
@@ -79,5 +79,3 @@ local options = {noremap = true}
 vim.api.nvim_set_keymap("n", "<A-t>", "<cmd> NvimTreeToggle<CR>", options)
 vim.api.nvim_set_keymap("n", "<Leader>r", "<cmd>NvimTreeRefresh<CR>", options)
 vim.api.nvim_set_keymap("n", "<Leader>n", "<cmd>NvimTreeFindFile<CR>", options)
-
-vim.cmd("hi NvimTreeFolderIcon guibg=blue")

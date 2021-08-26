@@ -42,21 +42,25 @@ for key, val in pairs(
         laststatus = 2, -- Always display the status line
         background = "dark",
         signcolumn = "number",
-        scrolloff = 999
+        scrolloff = 10
     }
 ) do
     vim.o[key] = val
 end
 
 vim.cmd("filetype plugin indent on")
-vim.cmd("colorscheme gruvbox8") -- gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8, sonokai
+vim.cmd("colorscheme sonokai") -- gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8, sonokai
 
-vim.cmd("hi GitGutterAdd  guifg=#009900 ctermfg=2")
-vim.cmd("hi GitGutterChange guifg=#bbbb00 ctermfg=3")
-vim.cmd("hi GitGutterDelete guifg=#ff2222 ctermfg=1")
+-- vim.cmd("hi GitGutterAdd  guifg=#009900 ctermfg=2")
+-- vim.cmd("hi GitGutterChange guifg=#bbbb00 ctermfg=3")
+-- vim.cmd("hi GitGutterDelete guifg=#ff2222 ctermfg=1")
 
-vim.cmd("hi Floaterm guifg=#424242")
-vim.cmd("hi FloatermBorder guifg=#424242")
+-- vim.cmd("hi! Floaterm guifg=#424242")
+-- vim.cmd("hi! FloatermBorder guifg=#424242")
+
+vim.cmd [[au VimEnter * highlight Floaterm guibg=#505050]]
+vim.cmd [[au VimEnter * highlight FloatermBorder guibg=#505050]]
+-- vim.cmd [[au VimEnter * highlight Normal guibg=NONE ctermbg=NONE]]
 
 vim.g.mapleader = ";"
 vim.g.node_client_debug = 1
@@ -72,8 +76,6 @@ vim.g.startify_lists = {
     {type = "sessions", header = {"   Sessions"}},
     {type = "bookmarks", header = {"   Bookmarks"}}
 }
-vim.g.delimitMate_expand_cr = 1
-vim.g.delimitMate_expand_space = 1
 
 vim.g.VM_maps = {
     ["Select Cursor Down"] = "<A-Down>",
@@ -173,3 +175,4 @@ vim.api.nvim_set_keymap("n", "<F9>", ":FloatermNext<CR>", options1)
 vim.api.nvim_set_keymap("t", "<F9>", "<C-\\><C-n>:FloatermNext<CR>", options1)
 vim.api.nvim_set_keymap("n", "<F12>", ":FloatermToggle<CR>", options1)
 vim.api.nvim_set_keymap("t", "<F12>", "<C-\\><C-n>:FloatermToggle<CR>", options1)
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", options1)
