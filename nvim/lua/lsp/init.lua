@@ -87,9 +87,19 @@ local luafmt = {
     formatStdin = true
 }
 
+local goimports = {
+    formatCommand = "goimports",
+    formatStdin = true
+}
+
+local gofumpt = {
+    formatCommand = "gofumpt -extra",
+    formatStdin = true
+}
+
 local efm_config = os.getenv("HOME") .. "/.config/efm-langserver/config.yaml"
 local efm_log_dir = "/tmp/"
-local efm_root_markers = {"package.json", ".git", ".zshrc"}
+local efm_root_markers = {"package.json", ".git", ".zshrc", ".gomod"}
 local efm_languages = {
     yaml = {prettier},
     json = {prettier},
@@ -105,6 +115,7 @@ local efm_languages = {
     graphql = {prettier},
     vue = {prettier},
     html = {prettier},
+    go = {goimports, gofumpt},
     lua = {luafmt}
 }
 
@@ -122,6 +133,7 @@ nvim_lsp.efm.setup(
             "javascriptreact",
             "typescript",
             "typescriptreact",
+            "go",
             "lua"
         },
         on_attach = on_attach,
@@ -142,6 +154,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.diagnostic.on_publish_diagnostics,
     {
         underline = true,
+        update_in_insert = true,
         -- This sets the spacing and the prefix, obviously.
         virtual_text = {
             spacing = 4,
@@ -182,8 +195,6 @@ local lua_settings = {
 }
 
 local function make_config()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
     return {
         -- enable snippet support
         capabilities = capabilities,

@@ -49,18 +49,16 @@ for key, val in pairs(
 end
 
 vim.cmd("filetype plugin indent on")
-vim.cmd("colorscheme sonokai") -- gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8, sonokai
-
--- vim.cmd("hi GitGutterAdd  guifg=#009900 ctermfg=2")
--- vim.cmd("hi GitGutterChange guifg=#bbbb00 ctermfg=3")
--- vim.cmd("hi GitGutterDelete guifg=#ff2222 ctermfg=1")
-
--- vim.cmd("hi! Floaterm guifg=#424242")
--- vim.cmd("hi! FloatermBorder guifg=#424242")
+vim.cmd("colorscheme tokyonight") -- gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8, sonokai
 
 vim.cmd [[au VimEnter * highlight Floaterm guibg=#505050]]
 vim.cmd [[au VimEnter * highlight FloatermBorder guibg=#505050]]
+-- vim.cmd [[au VimEnter * highlight CursorLine guibg=#595959]]
 -- vim.cmd [[au VimEnter * highlight Normal guibg=NONE ctermbg=NONE]]
+
+vim.cmd [[au VimEnter * hi GitGutterAdd  guifg=#00D000 ctermfg=2]]
+vim.cmd [[au VimEnter * hi GitGutterChange guifg=#EBEB00 ctermfg=3]]
+vim.cmd [[au VimEnter * hi GitGutterDelete guifg=#ff2222 ctermfg=1]]
 
 vim.g.mapleader = ";"
 vim.g.node_client_debug = 1
@@ -71,7 +69,7 @@ vim.g.indentLine_enabled = 0
 vim.g.startify_change_to_dir = 1
 vim.g.startify_change_to_vcs_root = 1
 vim.g.startify_lists = {
-    {type = "files", header = {"   Files"}},
+    -- {type = "files", header = {"   Files"}},
     {type = "dir", header = {("  Current Directory " .. vim.fn.getcwd())}},
     {type = "sessions", header = {"   Sessions"}},
     {type = "bookmarks", header = {"   Bookmarks"}}
@@ -122,8 +120,8 @@ vim.api.nvim_set_keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", options)
 vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", options)
 vim.api.nvim_set_keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", options)
 
-vim.api.nvim_set_keymap("n", "<A-l>", ":bnext<CR>", options)
-vim.api.nvim_set_keymap("n", "<A-h>", ":bprev<CR>", options)
+vim.api.nvim_set_keymap("n", "<Space>l", ":bnext<CR>", options)
+vim.api.nvim_set_keymap("n", "<Space>h", ":bprev<CR>", options)
 vim.api.nvim_set_keymap("n", "<Leader>d", ":bdelete<CR>", options)
 vim.api.nvim_set_keymap("n", "<Leader>c", ":copen<CR>", options)
 vim.api.nvim_set_keymap("n", "<Leader>cc", ":cclose<CR>", options)
@@ -148,14 +146,14 @@ vim.api.nvim_set_keymap("n", "<Leader>s", ":w<CR>", options)
 vim.api.nvim_set_keymap("i", "<Leader>s", "<ESC>:w<CR>", options)
 vim.api.nvim_set_keymap("v", "<Leader>s", "<ESC>:w<CR>", options)
 
-vim.api.nvim_set_keymap("n", "<Leader>h", ":noh<CR>", options)
+vim.api.nvim_set_keymap("n", "<Leader>hh", ":noh<CR>", options)
 
 vim.api.nvim_set_keymap("n", "<Leader>G", ":Git", options)
 
-vim.api.nvim_set_keymap("n", "<Space><Up>", ":resize +2<CR>", options)
-vim.api.nvim_set_keymap("n", "<Space><Down>", ":resize -2<CR>", options)
-vim.api.nvim_set_keymap("n", "<Space><Left>", ":vertical resize +2<CR>", options)
-vim.api.nvim_set_keymap("n", "<Space><Right>", ":vertical resize -2<CR>", options)
+vim.api.nvim_set_keymap("n", "<Space><Up>", ":resize +5<CR>", options)
+vim.api.nvim_set_keymap("n", "<Space><Down>", ":resize -5<CR>", options)
+vim.api.nvim_set_keymap("n", "<Space><Left>", ":vertical resize +5<CR>", options)
+vim.api.nvim_set_keymap("n", "<Space><Right>", ":vertical resize -5<CR>", options)
 
 vim.api.nvim_set_keymap("n", "<C-k>", ":wincmd k<CR>", options1)
 vim.api.nvim_set_keymap("n", "<C-j>", ":wincmd j<CR>", options1)

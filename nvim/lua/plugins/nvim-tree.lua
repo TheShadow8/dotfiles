@@ -3,8 +3,8 @@ local g = vim.g
 -- g.nvim_tree_side = "right"
 g.nvim_tree_width = 40
 g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
-g.nvim_tree_gitignore = 1
-g.nvim_tree_auto_open = 1
+g.nvim_tree_gitignore = 0
+g.nvim_tree_auto_open = 0
 g.nvim_tree_auto_close = 0
 g.nvim_tree_auto_ignore_ft = {"startify", "dashboard"}
 g.nvim_tree_quit_on_open = 1
@@ -14,10 +14,10 @@ g.nvim_tree_hide_dotfiles = 0
 g.nvim_tree_git_hl = 1
 g.nvim_tree_highlight_opened_files = 1
 g.nvim_tree_root_folder_modifier = ":~"
-g.nvim_tree_tab_open = 1
+g.nvim_tree_tab_open = 0
 g.nvim_tree_auto_resize = 0
-g.nvim_tree_disable_netrw = 0
-g.nvim_tree_hijack_netrw = 0
+g.nvim_tree_disable_netrw = 1
+g.nvim_tree_hijack_netrw = 1
 g.nvim_tree_add_trailing = 1
 g.nvim_tree_group_empty = 1
 g.nvim_tree_lsp_diagnostics = 1
@@ -26,7 +26,7 @@ g.nvim_tree_hijack_cursor = 0
 g.nvim_tree_icon_padding = " "
 g.nvim_tree_symlink_arrow = " >> "
 g.nvim_tree_update_cwd = 1
-g.nvim_tree_respect_buf_cwd = 1
+g.nvim_tree_respect_buf_cwd = 0
 g.nvim_tree_window_picker_exclude = {
     filetype = {
         "packer",
@@ -36,7 +36,12 @@ g.nvim_tree_window_picker_exclude = {
         "terminal"
     }
 }
-g.nvim_tree_special_files = {Makefile = 1, MAKEFILE = 1}
+
+local sf = {}
+sf["Makefile"] = 1
+sf["MAKEFILE"] = 1
+g.nvim_tree_special_files = sf
+
 g.nvim_tree_show_icons = {
     git = 1,
     folders = 1,
