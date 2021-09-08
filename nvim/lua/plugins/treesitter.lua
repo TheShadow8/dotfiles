@@ -2,6 +2,10 @@ require "nvim-treesitter.configs".setup {
     context_commentstring = {
         enable = true
     },
+    -- matchup = {
+    --     enable = true,
+    --     disable = {}
+    -- },
     highlight = {
         enable = true,
         disable = {}
@@ -13,11 +17,9 @@ require "nvim-treesitter.configs".setup {
     ensure_installed = {
         "tsx",
         "toml",
-        "fish",
-        "php",
+        "graphql",
         "json",
         "yaml",
-        "swift",
         -- "html",
         "scss",
         "go",

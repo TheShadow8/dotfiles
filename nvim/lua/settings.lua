@@ -59,12 +59,18 @@ vim.cmd [[au VimEnter * highlight FloatermBorder guibg=#505050]]
 vim.cmd [[au VimEnter * hi GitGutterAdd  guifg=#00D000 ctermfg=2]]
 vim.cmd [[au VimEnter * hi GitGutterChange guifg=#EBEB00 ctermfg=3]]
 vim.cmd [[au VimEnter * hi GitGutterDelete guifg=#ff2222 ctermfg=1]]
+vim.cmd [[au VimEnter * hi MatchWord guibg=#505050 cterm=underline gui=underline]]
+vim.cmd [[au VimEnter * hi MatchParen guifg=white guibg=#505050 ]]
 
 vim.g.mapleader = ";"
 vim.g.node_client_debug = 1
 vim.g.floaterm_width = 0.9
 vim.g.floaterm_height = 0.9
 vim.g.indentLine_enabled = 0
+-- vim.g.loaded_matchit = 1
+vim.g.matchup_matchparen_offscreen = {method = "popup"}
+vim.g.matchup_matchparen_deferred = 1
+vim.g.matchup_matchparen_hi_surround_always = 1
 
 vim.g.startify_change_to_dir = 1
 vim.g.startify_change_to_vcs_root = 1
@@ -75,11 +81,13 @@ vim.g.startify_lists = {
     {type = "bookmarks", header = {"   Bookmarks"}}
 }
 
-vim.g.VM_maps = {
-    ["Select Cursor Down"] = "<A-Down>",
-    ["Select Cursor Up"] = "<A-Up>"
-}
-vim.g.VM_mouse_mappings = 1
+-- vim.g.VM_maps = {
+--     ["Select Cursor Down"] = "<A-Down>",
+--     ["Select Cursor Up"] = "<A-Up>",
+--     ["Find Under"] = "<C-m>",
+--     ["Find Subword Under"] = "<C-m>"
+-- }
+-- vim.g.VM_mouse_mappings = 1
 
 --- ### Autocmd
 vim.api.nvim_command [[autocmd VimEnter * silent! lcd%:p:h]]
@@ -93,19 +101,13 @@ local options1 = {noremap = true, silent = true}
 -- General
 vim.api.nvim_set_keymap("c", "jk", "<C-C>", options)
 vim.api.nvim_set_keymap("i", "jj", "<ESC>", options)
-vim.api.nvim_set_keymap("i", "<Leader>;", "<Right>", options)
-vim.api.nvim_set_keymap("i", "<Leader>dd", "<ESC>ddi", options)
-vim.api.nvim_set_keymap("i", "<Leader>>", "<ESC>>>a", options)
-vim.api.nvim_set_keymap("i", "<Leader><", "<ESC><<a", options)
+vim.api.nvim_set_keymap("i", "jl", "<Right>", options)
 vim.api.nvim_set_keymap("v", ">", ">gv", options)
 vim.api.nvim_set_keymap("v", "<", "<gv", options)
 
 -- Make dir, file from current dir
 vim.api.nvim_set_keymap("n", "<Leader>w", ":! mkdir %:h/", options)
 vim.api.nvim_set_keymap("n", "<Leader>e", ":e %:h/", options)
-
-vim.api.nvim_set_keymap("i", "<Leader>w", "<ESC>:! mkdir %:h/", options)
-vim.api.nvim_set_keymap("i", "<Leader>e", "<ESC>:e %:h/", options)
 
 -- Map commentary
 vim.api.nvim_set_keymap("v", "<C-_>", "gc", {})
@@ -142,9 +144,8 @@ vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", options)
 vim.api.nvim_set_keymap("i", "<C-s>", "<ESC>:w<CR>", options)
 vim.api.nvim_set_keymap("v", "<C-s>", "<ESC>:w<CR>", options)
 
-vim.api.nvim_set_keymap("n", "<Leader>s", ":w<CR>", options)
-vim.api.nvim_set_keymap("i", "<Leader>s", "<ESC>:w<CR>", options)
-vim.api.nvim_set_keymap("v", "<Leader>s", "<ESC>:w<CR>", options)
+vim.api.nvim_set_keymap("n", "<Leader>s", "/\\<<C-r><C-w>\\>//<CR>", options)
+vim.api.nvim_set_keymap("n", "<Leader>S", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", options)
 
 vim.api.nvim_set_keymap("n", "<Leader>hh", ":noh<CR>", options)
 

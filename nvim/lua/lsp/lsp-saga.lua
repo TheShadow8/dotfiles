@@ -1,11 +1,24 @@
 local saga = require("lspsaga")
 
 saga.init_lsp_saga {
-    error_sign = "",
-    warn_sign = "",
-    hint_sign = "",
-    infor_sign = "",
+    use_saga_diagnostic_sign = true,
+    -- error_sign = "",
+    -- warn_sign = "",
+    -- hint_sign = "",
+    -- infor_sign = "",
+
+    error_sign = " ",
+    warn_sign = " ",
+    hint_sign = " ",
+    infor_sign = " ",
     border_style = "round",
+    code_action_icon = " ",
+    code_action_prompt = {
+        enable = true,
+        sign = false,
+        -- sign_priority = 20,
+        virtual_text = true
+    },
     finder_action_keys = {quit = "<ESC>"},
     code_action_keys = {quit = "<ESC>"},
     rename_action_keys = {quit = "<ESC>"}
@@ -41,3 +54,5 @@ vim.api.nvim_set_keymap(
     [[<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
     {noremap = true, silent = true}
 )
+
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'lspsaga.diagnostic'.show_line_diagnostics()]]

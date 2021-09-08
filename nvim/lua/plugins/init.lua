@@ -5,18 +5,12 @@ require "paq" {
     "tpope/vim-fugitive",
     "airblade/vim-gitgutter",
     -- General
-    -- Plug 'junegunn/fzf'
-    -- Plug 'junegunn/fzf.vim'
-    -- Plug 'preservim/nerdtree' |
-    --        \ Plug 'Xuyuanp/nerdtree-git-plugin'
-    "tiagofumo/vim-nerdtree-syntax-highlight",
     "tpope/vim-dispatch",
     "tpope/vim-commentary",
     "tpope/vim-surround",
-    {"mg979/vim-visual-multi", branch = "master"},
     "Yggdroot/indentLine",
+    "andymass/vim-matchup",
     -- Theme / Interface
-    -- "ap/vim-buftabline",
     {"styled-components/vim-styled-components", branch = "main"},
     "morhetz/gruvbox",
     "mhartington/oceanic-next",
@@ -39,15 +33,10 @@ require "paq" {
     "kyazdani42/nvim-tree.lua",
     "akinsho/bufferline.nvim",
     "windwp/nvim-autopairs",
-    -- "kristijanhusak/defx-git",
-    -- "kristijanhusak/defx-icons",
-    -- {"Shougo/defx.nvim",  run="UpdateRemotePlugins" };
     "neovim/nvim-lspconfig",
     "kabouzeid/nvim-lspinstall",
     "glepnir/lspsaga.nvim",
     "folke/lsp-colors.nvim",
-    -- "hrsh7th/nvim-compe",
-
     -- For auto completion
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-buffer",
@@ -62,7 +51,6 @@ require "paq" {
     {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
     "JoosepAlviste/nvim-ts-context-commentstring",
     "kyazdani42/nvim-web-devicons",
-    --Plug 'windwp/nvim-autopairs'
     "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim"

@@ -15,8 +15,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    -- client.resolved_capabilities.document_formatting = false
-
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
@@ -115,7 +113,7 @@ local efm_languages = {
     graphql = {prettier},
     vue = {prettier},
     html = {prettier},
-    go = {goimports, gofumpt},
+    go = {gofumpt, goimports},
     lua = {luafmt}
 }
 
@@ -153,26 +151,36 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
     {
-        underline = true,
-        update_in_insert = true,
+        signs = {
+            priority = 99
+        },
+        update_in_insert = true
         -- This sets the spacing and the prefix, obviously.
-        virtual_text = {
-            spacing = 4,
-            prefix = ""
-        }
     }
 )
 
--- require'lspinstall'.setup() -- important
---
--- local servers = require'lspinstall'.installed_servers()
--- for _, server in pairs(servers) do
---   require'lspconfig'[server].setup{}
--- end
+-- Set which codelens text levels to show
+local original_set_virtual_text = vim.lsp.diagnostic.set_virtual_text
+local set_virtual_text_custom = function(diagnostics, bufnr, client_id, sign_ns, opts)
+    opts = opts or {}
+    -- show all messages that are Warning and above (Warning, Error)
+    opts.spacing = 4
+    opts.prefix = ""
 
--- config that activates keymaps and enables snippet support
+    local prefixed_diagnostics = vim.deepcopy(diagnostics)
+    for i, v in pairs(diagnostics) do
+        local source_name = ""
+        if v.source ~= nil then
+            source_name = v.source
+        end
+        -- prefixed_diagnostics[i].message = string.format("%s", source_name)
+        prefixed_diagnostics[i].message = ""
+    end
+    original_set_virtual_text(prefixed_diagnostics, bufnr, client_id, sign_ns, opts)
+end
 
--- Configure lua language server for neovim development
+vim.lsp.diagnostic.set_virtual_text = set_virtual_text_custom
+
 local lua_settings = {
     Lua = {
         runtime = {
