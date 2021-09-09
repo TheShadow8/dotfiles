@@ -8,11 +8,16 @@ require "nvim-treesitter.configs".setup {
     -- },
     highlight = {
         enable = true,
-        disable = {}
+        disable = {
+            "html"
+        }
     },
     indent = {
-        enable = true,
+        enable = false,
         disable = {}
+    },
+    autotag = {
+        enable = true
     },
     ensure_installed = {
         "tsx",
@@ -20,7 +25,7 @@ require "nvim-treesitter.configs".setup {
         "graphql",
         "json",
         "yaml",
-        -- "html",
+        "html",
         "scss",
         "go",
         "javascript",

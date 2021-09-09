@@ -24,7 +24,7 @@ require "paq" {
     -- Session
     "mhinz/vim-startify",
     "tpope/vim-obsession",
-    "alvan/vim-closetag",
+    -- "alvan/vim-closetag",
     "voldikss/vim-floaterm",
     ------ NVIM
     "savq/paq-nvim",
@@ -47,9 +47,9 @@ require "paq" {
     "rafamadriz/friendly-snippets",
     "onsails/lspkind-nvim",
     --
-    "mhartington/formatter.nvim",
     {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
     "JoosepAlviste/nvim-ts-context-commentstring",
+    "windwp/nvim-ts-autotag",
     "kyazdani42/nvim-web-devicons",
     "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
