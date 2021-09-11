@@ -7,6 +7,7 @@ saga.init_lsp_saga {
     -- hint_sign = "",
     -- infor_sign = "",
 
+    max_preview_lines = 20,
     error_sign = " ",
     warn_sign = " ",
     hint_sign = " ",
@@ -19,7 +20,7 @@ saga.init_lsp_saga {
         -- sign_priority = 20,
         virtual_text = true
     },
-    finder_action_keys = {quit = "<ESC>"},
+    finder_action_keys = {quit = "<ESC>", open = "<CR>"},
     code_action_keys = {quit = "<ESC>"},
     rename_action_keys = {quit = "<ESC>"}
 }
@@ -35,7 +36,7 @@ vim.api.nvim_set_keymap("v", "<Leader>ca", "<Cmd><C-U>Lspsaga range_code_action<
 
 vim.api.nvim_set_keymap("i", "<C-k>", "<Cmd>Lspsaga signature_help<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "gs", "<Cmd>Lspsaga signature_help<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gd", "<Cmd>Lspsaga preview_definition<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<Leader>gd", "<Cmd>Lspsaga preview_definition<CR>", {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<Leader>cx", "<Cmd>Lspsaga show_cursor_diagnostics<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<Leader>cd", "<Cmd>Lspsaga show_line_diagnostics<CR>", {noremap = true, silent = true})
@@ -44,7 +45,7 @@ vim.api.nvim_set_keymap("n", "<Leader>gr", "<Cmd>Lspsaga rename<CR>", {noremap =
 
 vim.api.nvim_set_keymap(
     "n",
-    "<C-w>",
+    "<C-f>",
     [[<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]],
     {noremap = true, silent = true}
 )

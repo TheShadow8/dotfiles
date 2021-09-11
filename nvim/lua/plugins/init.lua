@@ -9,7 +9,6 @@ require "paq" {
     "tpope/vim-commentary",
     "tpope/vim-surround",
     "Yggdroot/indentLine",
-    "andymass/vim-matchup",
     -- Theme / Interface
     {"styled-components/vim-styled-components", branch = "main"},
     "morhetz/gruvbox",
@@ -35,7 +34,8 @@ require "paq" {
     "windwp/nvim-autopairs",
     "neovim/nvim-lspconfig",
     "kabouzeid/nvim-lspinstall",
-    "glepnir/lspsaga.nvim",
+    -- "glepnir/lspsaga.nvim",
+    {"jasonrhansen/lspsaga.nvim", branch = "finder-preview-fixes"},
     "folke/lsp-colors.nvim",
     -- For auto completion
     "hrsh7th/nvim-cmp",

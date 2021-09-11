@@ -26,7 +26,7 @@ for key, val in pairs(
         undofile = true,
         incsearch = true,
         swapfile = false,
-        cursorline = true,
+        -- cursorline = true,
         backup = false,
         writebackup = false,
         smartindent = true,
@@ -74,11 +74,6 @@ g.node_client_debug = 1
 g.floaterm_width = 0.9
 g.floaterm_height = 0.9
 g.indentLine_enabled = 0
--- g.loaded_matchit = 1
-g.matchup_text_obj_enabled = 0
-g.matchup_matchparen_offscreen = {method = "popup"}
-g.matchup_matchparen_deferred = 1
-g.matchup_matchparen_hi_surround_always = 1
 
 g.startify_change_to_dir = 1
 g.startify_change_to_vcs_root = 1
@@ -137,8 +132,6 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", options)
 keymap("n", "<Space>l", ":bnext<CR>", options)
 keymap("n", "<Space>h", ":bprev<CR>", options)
 keymap("n", "<Leader>d", ":bdelete<CR>", options)
-keymap("n", "<Leader>c", ":copen<CR>", options)
-keymap("n", "<Leader>cc", ":cclose<CR>", options)
 
 -- Git Gutter
 keymap("n", "]h", "<Plug>(GitGutterNextHunk)", {})

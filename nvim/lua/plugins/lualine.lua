@@ -31,8 +31,8 @@ lualine.setup {
                 color_added = "#00D000",
                 color_modified = "#EBEB00",
                 color_removed = "#ff2222"
-            },
-            getStatusCount
+            }
+            -- getStatusCount
         },
         lualine_c = {"filename"},
         lualine_x = {
