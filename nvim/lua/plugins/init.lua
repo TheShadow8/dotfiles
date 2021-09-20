@@ -9,6 +9,7 @@ require "paq" {
     "tpope/vim-commentary",
     "tpope/vim-surround",
     "Yggdroot/indentLine",
+    "Valloric/MatchTagAlways",
     -- Theme / Interface
     {"styled-components/vim-styled-components", branch = "main"},
     "morhetz/gruvbox",

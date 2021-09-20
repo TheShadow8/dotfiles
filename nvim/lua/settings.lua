@@ -26,7 +26,7 @@ for key, val in pairs(
         undofile = true,
         incsearch = true,
         swapfile = false,
-        -- cursorline = true,
+        cursorline = true,
         backup = false,
         writebackup = false,
         smartindent = true,
@@ -49,7 +49,10 @@ for key, val in pairs(
         laststatus = 2, -- Always display the status line
         background = "dark",
         signcolumn = "number",
-        scrolloff = 6
+        scrolloff = 6,
+        wildignore = "*/node_modules/*,*/dist/*",
+        grepprg = "rg --vimgrep --no-heading --smart-case",
+        grepformat = "%f:%l:%c:%m"
     }
 ) do
     o[key] = val
@@ -82,6 +85,15 @@ g.startify_lists = {
     {type = "dir", header = {("  Current Directory " .. fn.getcwd())}},
     {type = "sessions", header = {"   Sessions"}},
     {type = "bookmarks", header = {"   Bookmarks"}}
+}
+
+g.mta_filetypes = {
+    html = 1,
+    xhtml = 1,
+    xml = 1,
+    jinja = 1,
+    javascript = 1,
+    typescript = 1
 }
 
 --- ### Autocmd
@@ -129,8 +141,8 @@ keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", options)
 keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", options)
 keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", options)
 
-keymap("n", "<Space>l", ":bnext<CR>", options)
-keymap("n", "<Space>h", ":bprev<CR>", options)
+keymap("n", "<A-l>", ":bnext<CR>", options)
+keymap("n", "<A-h>", ":bprev<CR>", options)
 keymap("n", "<Leader>d", ":bdelete<CR>", options)
 
 -- Git Gutter

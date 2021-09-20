@@ -59,10 +59,24 @@ vim.api.nvim_set_keymap("n", "<Leader>f", '<cmd>lua require("telescope.builtin")
 vim.api.nvim_set_keymap("n", "<Leader>F", '<cmd>lua require("telescope.builtin").grep_string()<CR>', options)
 vim.api.nvim_set_keymap(
     "n",
-    "<Leader>bf",
+    "<Leader><Leader>b",
     '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>',
     options
 )
 
-vim.api.nvim_set_keymap("n", "<Leader>t", '<cmd>lua require("telescope.builtin").help_tags()<CR>', options)
-vim.api.nvim_set_keymap("n", "<Leader>rf", '<cmd>lua require("telescope.builtin").lsp_references()<CR>', options)
+vim.api.nvim_set_keymap("n", "<Leader><Leader>t", '<cmd>lua require("telescope.builtin").help_tags()<CR>', options)
+vim.api.nvim_set_keymap("n", "<Leader><Leader>r", '<cmd>lua require("telescope.builtin").lsp_references()<CR>', options)
+vim.api.nvim_set_keymap(
+    "n",
+    "<Leader><Leader>s",
+    '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>',
+    options
+)
+vim.api.nvim_set_keymap(
+    "n",
+    "<Leader><Leader>l",
+    '<cmd>lua require("telescope.builtin").lsp_workspace_diagnostics()<CR>',
+    options
+)
+
+vim.api.nvim_set_keymap("n", "<Leader><Leader>g", '<cmd>lua require("telescope.builtin").git_status()<CR>', options)
