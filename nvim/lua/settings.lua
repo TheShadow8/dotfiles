@@ -63,14 +63,10 @@ cmd("colorscheme tokyonight") -- gruvbox, codedark, ayu, dracula, tokyonight, gr
 
 cmd [[au VimEnter * highlight Floaterm guibg=#505050]]
 cmd [[au VimEnter * highlight FloatermBorder guibg=#505050]]
--- cmd [[au VimEnter * highlight CursorLine guibg=#595959]]
--- cmd [[au VimEnter * highlight Normal guibg=NONE ctermbg=NONE]]
 
-cmd [[au VimEnter * hi GitGutterAdd  guifg=#00D000 ctermfg=2]]
-cmd [[au VimEnter * hi GitGutterChange guifg=#EBEB00 ctermfg=3]]
-cmd [[au VimEnter * hi GitGutterDelete guifg=#ff2222 ctermfg=1]]
-cmd [[au VimEnter * hi MatchWord guibg=#505050 cterm=underline gui=underline]]
-cmd [[au VimEnter * hi MatchParen guifg=white guibg=#505050 ]]
+cmd [[au VimEnter * hi GitSignsAdd guifg=#00D000 ctermfg=2]]
+cmd [[au VimEnter * hi GitSignsChange guifg=#EBEB00 ctermfg=3]]
+cmd [[au VimEnter * hi GitSignsDelete guifg=#ff2222 ctermfg=1]]
 
 g.mapleader = ";"
 g.node_client_debug = 1
@@ -145,15 +141,8 @@ keymap("n", "<A-l>", ":bnext<CR>", options)
 keymap("n", "<A-h>", ":bprev<CR>", options)
 keymap("n", "<Leader>d", ":bdelete<CR>", options)
 
--- Git Gutter
-keymap("n", "]h", "<Plug>(GitGutterNextHunk)", {})
-keymap("n", "[h", "<Plug>(GitGutterPrevHunk)", {})
-
 -- Indent line
 keymap("n", "<Leader>i", ":IndentLinesToggle<CR>", options)
-
--- Git blamer
-keymap("n", "<Leader>gb", ":BlamerToggle<CR>", options)
 
 keymap("n", "<C-z>", "<nop>", options)
 

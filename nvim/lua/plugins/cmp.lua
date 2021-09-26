@@ -65,7 +65,7 @@ cmp.setup {
     sources = {
         {
             name = "nvim_lsp",
-            max_item_count = 10
+            max_item_count = 20
         },
         {
             name = "buffer",
@@ -76,8 +76,8 @@ cmp.setup {
             max_item_count = 5
         },
         {
-            name = "vsnip"
-            -- max_item_count = 10
+            name = "vsnip",
+            max_item_count = 10
         }
     }
 }

@@ -3,7 +3,6 @@
 require "paq" {
     -- Git
     "tpope/vim-fugitive",
-    "airblade/vim-gitgutter",
     -- General
     "tpope/vim-dispatch",
     "tpope/vim-commentary",
@@ -28,7 +27,7 @@ require "paq" {
     "voldikss/vim-floaterm",
     ------ NVIM
     "savq/paq-nvim",
-    "APZelos/blamer.nvim",
+    "lewis6991/gitsigns.nvim",
     "hoob3rt/lualine.nvim",
     "kyazdani42/nvim-tree.lua",
     "akinsho/bufferline.nvim",
@@ -51,6 +50,7 @@ require "paq" {
     {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
     "JoosepAlviste/nvim-ts-context-commentstring",
     "windwp/nvim-ts-autotag",
+    "norcalli/nvim-colorizer.lua",
     "kyazdani42/nvim-web-devicons",
     "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
@@ -58,6 +58,7 @@ require "paq" {
 }
 
 require("plugins/web-devicons")
+require("plugins/colorizer")
 require("plugins/autopairs")
 require("plugins/lsp-kind")
 require("plugins/nvim-tree")
@@ -67,3 +68,4 @@ require("plugins/formatter")
 require("plugins/treesitter")
 require("plugins/lualine")
 require("plugins/telescope")
+require("plugins/gitsigns")

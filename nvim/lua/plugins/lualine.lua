@@ -26,6 +26,7 @@ lualine.setup {
         lualine_a = {"mode"},
         lualine_b = {
             "branch",
+            -- "b:gitsigns_status",
             {
                 "diff",
                 color_added = "#00D000",
