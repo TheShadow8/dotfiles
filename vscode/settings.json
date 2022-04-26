@@ -1,0 +1,334 @@
+{
+    "editor.formatOnSave": true,
+    "eslint.alwaysShowStatus": true,
+    "editor.tabCompletion": "on",
+    "typescript.validate.enable": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "git.ignoreMissingGitWarning": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.port": 0,
+    "git.confirmSync": false,
+    "editor.fontFamily": "Hack",
+    "editor.fontSize": 16,
+    "editor.fontLigatures": true,
+    "editor.parameterHints.enabled": false,
+    "indentRainbow.colors": [
+      "rgba(64,64,16,0.3)",
+      "rgba(32,64,32,0.3)",
+      "rgba(64,32,64,0.3)",
+      "rgba(145, 79, 79, 0.1)",
+      "rgba(240, 192, 192, 0.05)"
+    ],
+    "indentRainbow.errorColor": "rgba(64,64,16,0.5)",
+    "todohighlight.keywords": [
+      "DEBUG:",
+      "REVIEW:",
+      "NOTE:"
+    ],
+    // turn it off for JS and JSX, we will do this via eslint
+    // "[javascript]": {
+    //   "editor.formatOnSave": true
+    // },
+    // "[javascriptreact]": {
+    //   "editor.formatOnSave": true
+    // },
+    // tell the ESLint plugin to run on save
+    // Optional BUT IMPORTANT: If you have the prettier extension enabled for other languages like CSS and HTML, turn it off for JS since we are doing it through Eslint already
+    // "prettier.disableLanguages": ["javascript", "javascriptreact"],
+    "liveServer.settings.donotVerifyTags": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
+    "editor.cursorSmoothCaretAnimation": true,
+    "javascript.inlayHints.parameterNames.enabled": "all",
+    "typescript.inlayHints.parameterNames.enabled": "all",
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+    },
+    "files.associations": {
+      "*.ejs": "html"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.minimap.enabled": true,
+    "editor.renderWhitespace": "none",
+    "go.useLanguageServer": true,
+    "gopls": {
+      "formatting.gofumpt": true,
+    },
+    "workbench.statusBar.visible": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.renderControlCharacters": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "prettier.endOfLine": "auto",
+    "window.menuBarVisibility": "toggle",
+    "workbench.panel.defaultLocation": "bottom",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "vim.leader": ";",
+    "vim.useCtrlKeys": true,
+    // Insert mode
+    "vim.insertModeKeyBindings": [
+      // In insert mode jj to escape
+      {
+        "before": [
+          "j",
+          "j"
+        ],
+        "after": [
+          "<Esc>"
+        ]
+      },
+      {
+        "before": [
+          "j",
+          "l"
+        ],
+        "after": [
+          "<Right>"
+        ]
+      },
+      {
+        "before": [
+          "<C-s>",
+        ],
+        "commands": [
+          ":w"
+        ]
+      },
+    ],
+    // Visual mode
+    "vim.visualModeKeyBindings": [
+      // In visual mode i goes to insert mode
+      {
+        "before": [
+          "i",
+          "i"
+        ],
+        "after": [
+          "<Esc>",
+          "i"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "d"
+        ],
+        "commands": [
+          ":bdelete"
+        ]
+      }
+    ],
+    "vim.normalModeKeyBindings": [
+      {
+        "before": [
+          "<leader>",
+          "d"
+        ],
+        "commands": [
+          ":bdelete"
+        ]
+      },
+      {
+        "before": [
+          "<Space>",
+          "h"
+        ],
+        "commands": [
+          ":bprev"
+        ]
+      },
+      {
+        "before": [
+          "<Space>",
+          "l"
+        ],
+        "commands": [
+          ":bnext"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "h",
+          "h"
+        ],
+        "commands": [
+          ":noh"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "f"
+        ],
+        "commands": [
+          "workbench.action.findInFiles"
+        ]
+      },
+      {
+        "before": [
+          "*",
+        ],
+        "commands": [
+          "actions.find"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "c",
+          "a"
+        ],
+        "commands": [
+          "editor.action.quickFix"
+        ]
+      },
+      {
+        "before": [
+          "g",
+          "h"
+        ],
+        "commands": [
+          "editor.action.goToReferences"
+        ]
+      },
+      {
+        "before": [
+          "K",
+        ],
+        "commands": [
+          "editor.action.showHover"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "c",
+          "d"
+        ],
+        "commands": [
+          "editor.action.showHover"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "]"
+        ],
+        "commands": [
+          "editor.action.marker.nextInFiles"
+        ]
+      },
+      {
+        "before": [
+          "<leader>",
+          "["
+        ],
+        "commands": [
+          "editor.action.marker.prevInFiles"
+        ]
+      },
+      {
+        "before": [
+          "g",
+          "d"
+        ],
+        "commands": [
+          "editor.action.revealDefinition"
+        ]
+      }
+    ],
+    // Escaping from vim for below commands
+    "vim.handleKeys": {
+      // Select all
+      "<C-a>": false,
+      // VS Code search in file
+      "<C-f>": false,
+      // VS Code new marker @ next occurence
+      "<C-d>": false,
+      // Copy
+      "<C-c>": false,
+      // Cut
+      "<C-x>": false,
+      // Paste
+      "<C-v>": false,
+      "<C-w>": false,
+    },
+    "vim.useSystemClipboard": true,
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": [
+      "#8FBCBB",
+      "#434C5E"
+    ],
+    "vim.statusBarColors.insert": "#BF616A",
+    "vim.statusBarColors.visual": "#B48EAD",
+    "vim.statusBarColors.visualline": "#B48EAD",
+    "vim.statusBarColors.visualblock": "#A3BE8C",
+    "vim.statusBarColors.replace": "#D08770",
+    "vim.statusBarColors.commandlineinprogress": "#007ACC",
+    "vim.statusBarColors.searchinprogressmode": "#007ACC",
+    "vim.statusBarColors.easymotionmode": "#007ACC",
+    "vim.statusBarColors.easymotioninputmode": "#007ACC",
+    "vim.statusBarColors.surroundinputmode": "#007ACC",
+    "vim.searchHighlightColor": "#424242",
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.lineNumbers": "on",
+    "editor.multiCursorModifier": "ctrlCmd",
+    "search.useReplacePreview": false,
+    "workbench.quickOpen.closeOnFocusLost": false,
+    "workbench.editor.limit.value": 1,
+    "go.toolsManagement.autoUpdate": true,
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "workbench.editorAssociations": {
+      "*.ipynb": "jupyter.notebook.ipynb",
+      "*.docx": "default"
+    },
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.editor.enablePreview": false,
+    "editor.tabSize": 8,
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": false,
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.wordWrap": "off",
+    "editor.inlayHints.enabled": false,
+    "terminal.integrated.tabs.location": "left",
+    "eslint.lintTask.enable": true,
+    "prettier.enableDebugLogs": true,
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#B48EAD",
+      "statusBar.noFolderBackground": "#B48EAD",
+      "statusBar.debuggingBackground": "#B48EAD",
+      "statusBar.foreground": "#434C5E",
+      "statusBar.debuggingForeground": "#434C5E"
+    },
+    "editor.bracketPairColorization.enabled": true,
+    "prettier.htmlWhitespaceSensitivity": "strict",
+    "prettier.resolveGlobalModules": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.largeFileOptimizations": false,
+    "workbench.colorTheme": "Tokyo Night Gogh",
+    "auto-close-tag.disableOnLanguage": [
+      "javascript",
+      "typescript"
+    ],
+    "terminal.integrated.tabs.enabled": false
+  }
