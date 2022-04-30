@@ -1,60 +1,61 @@
 -- vim.cmd 'packadd paq-nvim'            -- load package
 
 require "paq" {
-    -- Git
-    "tpope/vim-fugitive",
-    -- General
-    "tpope/vim-dispatch",
-    "tpope/vim-commentary",
-    "tpope/vim-surround",
-    "Yggdroot/indentLine",
-    "Valloric/MatchTagAlways",
-    -- Theme / Interface
-    {"styled-components/vim-styled-components", branch = "main"},
-    "morhetz/gruvbox",
-    "mhartington/oceanic-next",
-    {"dracula/vim", as = "dracula"},
-    "ayu-theme/ayu-vim",
-    "joshdick/onedark.vim",
-    "tomasiser/vim-code-dark",
-    "ghifarit53/tokyonight-vim",
-    "lifepillar/vim-gruvbox8",
-    "sainnhe/sonokai",
-    -- Session
-    "mhinz/vim-startify",
-    "tpope/vim-obsession",
-    -- "alvan/vim-closetag",
-    "voldikss/vim-floaterm",
-    ------ NVIM
-    "savq/paq-nvim",
-    "lewis6991/gitsigns.nvim",
-    "hoob3rt/lualine.nvim",
-    "kyazdani42/nvim-tree.lua",
-    "akinsho/bufferline.nvim",
-    "windwp/nvim-autopairs",
-    "neovim/nvim-lspconfig",
-    "kabouzeid/nvim-lspinstall",
-    -- "glepnir/lspsaga.nvim",
-    {"jasonrhansen/lspsaga.nvim", branch = "finder-preview-fixes"},
-    "folke/lsp-colors.nvim",
-    -- For auto completion
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/vim-vsnip",
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-path",
-    "rafamadriz/friendly-snippets",
-    "onsails/lspkind-nvim",
-    --
-    {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    "windwp/nvim-ts-autotag",
-    "norcalli/nvim-colorizer.lua",
-    "kyazdani42/nvim-web-devicons",
-    "nvim-lua/popup.nvim",
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim"
+  -- Git
+  "tpope/vim-fugitive",
+  -- General
+  "tpope/vim-dispatch",
+  "tpope/vim-commentary",
+  "tpope/vim-surround",
+  "Yggdroot/indentLine",
+  "Valloric/MatchTagAlways",
+  -- Theme / Interface
+  { "styled-components/vim-styled-components", branch = "main" },
+  "morhetz/gruvbox",
+  "mhartington/oceanic-next",
+  { "dracula/vim", as = "dracula" },
+  "ayu-theme/ayu-vim",
+  "joshdick/onedark.vim",
+  "tomasiser/vim-code-dark",
+  "ghifarit53/tokyonight-vim",
+  "lifepillar/vim-gruvbox8",
+  "sainnhe/sonokai",
+  -- Session
+  "mhinz/vim-startify",
+  "tpope/vim-obsession",
+  -- "alvan/vim-closetag",
+  "voldikss/vim-floaterm",
+  ------ NVIM
+  "savq/paq-nvim",
+  "lewis6991/gitsigns.nvim",
+  "hoob3rt/lualine.nvim",
+  "kyazdani42/nvim-tree.lua",
+  "akinsho/bufferline.nvim",
+  "windwp/nvim-autopairs",
+  { "neovim/nvim-lspconfig", branch = "v0.1.3" },
+  "williamboman/nvim-lsp-installer",
+  "VonHeikemen/lsp-zero.nvim",
+  "L3MON4D3/LuaSnip",
+  "tami5/lspsaga.nvim",
+  "folke/lsp-colors.nvim",
+  -- For auto completion
+  "hrsh7th/nvim-cmp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/vim-vsnip",
+  "hrsh7th/cmp-vsnip",
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-path",
+  "rafamadriz/friendly-snippets",
+  "onsails/lspkind-nvim",
+  --
+  { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
+  "JoosepAlviste/nvim-ts-context-commentstring",
+  "windwp/nvim-ts-autotag",
+  "norcalli/nvim-colorizer.lua",
+  "kyazdani42/nvim-web-devicons",
+  "nvim-lua/popup.nvim",
+  "nvim-lua/plenary.nvim",
+  "nvim-telescope/telescope.nvim"
 }
 
 require("plugins/web-devicons")

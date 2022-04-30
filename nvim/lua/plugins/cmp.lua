@@ -15,10 +15,13 @@ cmp.setup {
         completeopt = "menu,menuone,noinsert"
     },
     formatting = {
-        format = function(entry, vim_item)
+        format = lspkind.cmp_format({
+          mode = 'symbol',
+          before = function(entry, vim_item)
             vim_item.kind = lspkind.presets.default[vim_item.kind]
             return vim_item
         end
+        })
     },
     snippet = {
         expand = function(args)
@@ -82,9 +85,17 @@ cmp.setup {
     }
 }
 
-require("nvim-autopairs.completion.cmp").setup(
-    {
-        map_cr = true, --  map <CR> on insert mode
-        map_complete = true -- it will auto insert `(` after select function or method item
-    }
-)
+-- require("nvim-autopairs.completion.cmp").setup(
+--     {
+--         map_cr = true, --  map <CR> on insert mode
+--         map_complete = true -- it will auto insert `(` after select function or method item
+--     }
+-- )
+
+-- If you want insert `(` after select function or method item
+ local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+ cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = ''  }  }) )
+
+
+ -- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet"  }
+ cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"

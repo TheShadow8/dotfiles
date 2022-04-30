@@ -56,4 +56,4 @@ vim.api.nvim_set_keymap(
     {noremap = true, silent = true}
 )
 
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'lspsaga.diagnostic'.show_line_diagnostics()]]
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'lspsaga.diagnostic'.show_line_diagnostics()]]
