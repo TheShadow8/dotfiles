@@ -1,23 +1,34 @@
-local lsp = require('lsp-zero')
+-- local lsp = require("lsp-zero")
 
-lsp.preset('recommended')
-lsp.nvim_workspace()
-lsp.setup()
+-- -- lsp.preset("recommended")
 
+-- lsp.set_preferences(
+--   {
+--   suggest_lsp_servers = true,
+--   setup_servers_on_start = true,
+--   set_lsp_keymaps = true,
+--   configure_diagnostics = true,
+--   cmp_capabilities = true,
+--   manage_nvim_cmp = false,
+--   call_servers = "local"
+-- }
+-- )
+-- lsp.nvim_workspace()
+-- lsp.setup()
 
 local nvim_lsp = require("lspconfig")
 require("lsp/lsp-saga")
 require("lsp/lsp-colors")
 
---local capabilities = vim.lsp.protocol.make_client_capabilities()
---capabilities.textDocument.completion.completionItem.snippetSupport = true
---capabilities.textDocument.completion.completionItem.resolveSupport = {
---  properties = {
---    "documentation",
---    "detail",
---    "additionalTextEdits"
---  }
---}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits"
+  }
+}
 
 ---- Use an on_attach function to only map the following keys
 ---- after the language server attaches to the current buffer
@@ -64,45 +75,41 @@ local on_attach = function(client, bufnr)
   end
 end
 
---nvim_lsp.flow.setup {
---  on_attach = on_attach
---}
+nvim_lsp.flow.setup {
+  on_attach = on_attach
+}
 
---nvim_lsp.gopls.setup {}
+-- nvim_lsp.golangcilsp.setup {}
+nvim_lsp.gopls.setup {}
 
---local lua_settings = {
---  Lua = {
---    runtime = {
---      -- LuaJIT in the case of Neovim
---      version = "LuaJIT",
---      path = vim.split(package.path, ";")
---    },
---    diagnostics = {
---      -- Get the language server to recognize the `vim` global
---      globals = { "vim" }
---    },
---    workspace = {
---      -- Make the server aware of Neovim runtime files
---      library = {
---        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
---        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
---      }
---    }
---  }
---}
+local lua_settings = {
+  Lua = {
+    runtime = {
+      -- LuaJIT in the case of Neovim
+      version = "LuaJIT",
+      path = vim.split(package.path, ";")
+    },
+    diagnostics = {
+      -- Get the language server to recognize the `vim` global
+      globals = { "vim" }
+    },
+    workspace = {
+      -- Make the server aware of Neovim runtime files
+      library = {
+        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+      }
+    }
+  }
+}
 
---nvim_lsp.sumneko_lua.setup({
---  settings = lua_settings
---})
+nvim_lsp.sumneko_lua.setup(
+  {
+  settings = lua_settings
+}
+)
 
---nvim_lsp.tsserver.setup {
---  -- on_attach = function(client)
---  --   client.resolved_capabilities.document_formatting = false
---  --   on_attach(client)
---  -- end,
---  -- filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
---  -- capabilities = capabilities
---}
+nvim_lsp.tsserver.setup {}
 
 local prettier = {
   formatCommand = "prettier --find-config-path --stdin-filepath ${INPUT}",
@@ -207,7 +214,7 @@ local set_virtual_text_custom = function(diagnostics, bufnr, client_id, sign_ns,
     if v.source ~= nil then
       source_name = v.source
     end
-    -- prefixed_diagnostics[i].message = string.format("%s", source_name)
+    prefixed_diagnostics[i].message = string.format("%s", source_name)
     prefixed_diagnostics[i].message = ""
   end
   original_set_virtual_text(prefixed_diagnostics, bufnr, client_id, sign_ns, opts)

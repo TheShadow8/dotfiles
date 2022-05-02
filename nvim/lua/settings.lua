@@ -74,7 +74,7 @@ g.floaterm_width = 0.9
 g.floaterm_height = 0.9
 g.indentLine_enabled = 0
 
-g.startify_change_to_dir = 1
+g.startify_change_to_dir = 0
 g.startify_change_to_vcs_root = 1
 g.startify_lists = {
     -- {type = "files", header = {"   Files"}},

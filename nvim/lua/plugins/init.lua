@@ -61,7 +61,6 @@ require "paq" {
 require("plugins/web-devicons")
 require("plugins/colorizer")
 require("plugins/autopairs")
-require("plugins/lsp-kind")
 require("plugins/nvim-tree")
 require("plugins/bufferline")
 require("plugins/cmp")
