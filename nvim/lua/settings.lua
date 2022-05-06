@@ -6,56 +6,56 @@ local ncmd = vim.api.nvim_command
 local keymap = vim.api.nvim_set_keymap
 
 for key, val in pairs(
-    {
-        encoding = "utf8",
-        -- nocompatible = true,
-        number = true,
-        relativenumber = true,
-        tabstop = 2,
-        shiftwidth = 2,
-        smarttab = true,
-        expandtab = true,
-        errorbells = false,
-        wildmenu = true, -- Show menu to move to select. Example: find
-        history = 50,
-        clipboard = o.clipboard .. "unnamedplus",
-        backspace = "indent,eol,start",
-        guifont = "Fira Code:h13",
-        bg = "dark",
-        undodir = os.getenv("HOME") .. "/.vim/undodir",
-        undofile = true,
-        incsearch = true,
-        swapfile = false,
-        cursorline = true,
-        backup = false,
-        writebackup = false,
-        smartindent = true,
-        cmdheight = 2,
-        shortmess = o.shortmess .. "c",
-        hlsearch = true,
-        sidescroll = 1,
-        wrap = false,
-        switchbuf = "usetab",
-        lazyredraw = true,
-        title = true,
-        mouse = "a",
-        hidden = true,
-        updatetime = 300,
-        smartcase = true, -- Auto switch to case sensitive when Upper-case use (exp: Search ...),
-        colorcolumn = "80",
-        termguicolors = true, -- enable true colors support (24 bit colors) let g:go_def_mapping_enabled = 0,
-        titlestring = '%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%)', -- configure title to look like: Vim /path/to/file,
-        completeopt = "menu,menuone,noselect",
-        laststatus = 2, -- Always display the status line
-        background = "dark",
-        signcolumn = "number",
-        scrolloff = 6,
-        wildignore = "*/node_modules/*,*/dist/*",
-        grepprg = "rg --vimgrep --no-heading --smart-case",
-        grepformat = "%f:%l:%c:%m"
-    }
+  {
+  encoding = "utf8",
+  -- nocompatible = true,
+  number = true,
+  relativenumber = true,
+  tabstop = 2,
+  shiftwidth = 2,
+  smarttab = true,
+  expandtab = true,
+  errorbells = false,
+  wildmenu = true, -- Show menu to move to select. Example: find
+  history = 50,
+  clipboard = o.clipboard .. "unnamedplus",
+  backspace = "indent,eol,start",
+  guifont = "Fira Code:h13",
+  bg = "dark",
+  undodir = os.getenv("HOME") .. "/.vim/undodir",
+  undofile = true,
+  incsearch = true,
+  swapfile = false,
+  cursorline = true,
+  backup = false,
+  writebackup = false,
+  smartindent = true,
+  cmdheight = 2,
+  shortmess = o.shortmess .. "c",
+  hlsearch = true,
+  sidescroll = 1,
+  wrap = false,
+  switchbuf = "usetab",
+  lazyredraw = true,
+  title = true,
+  mouse = "a",
+  hidden = true,
+  updatetime = 300,
+  smartcase = true, -- Auto switch to case sensitive when Upper-case use (exp: Search ...),
+  colorcolumn = "80",
+  termguicolors = true, -- enable true colors support (24 bit colors) let g:go_def_mapping_enabled = 0,
+  titlestring = '%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%)', -- configure title to look like: Vim /path/to/file,
+  completeopt = "menu,menuone,noselect",
+  laststatus = 2, -- Always display the status line
+  background = "dark",
+  signcolumn = "number",
+  scrolloff = 6,
+  wildignore = "*/node_modules/*,*/dist/*",
+  grepprg = "rg --vimgrep --no-heading --smart-case",
+  grepformat = "%f:%l:%c:%m"
+}
 ) do
-    o[key] = val
+  o[key] = val
 end
 
 cmd("filetype plugin indent on")
@@ -77,20 +77,22 @@ g.indentLine_enabled = 0
 g.startify_change_to_dir = 0
 g.startify_change_to_vcs_root = 1
 g.startify_lists = {
-    -- {type = "files", header = {"   Files"}},
-    {type = "dir", header = {("  Current Directory " .. fn.getcwd())}},
-    {type = "sessions", header = {"   Sessions"}},
-    {type = "bookmarks", header = {"   Bookmarks"}}
+  -- {type = "files", header = {"   Files"}},
+  { type = "dir", header = { ("  Current Directory " .. fn.getcwd()) } },
+  { type = "sessions", header = { "   Sessions" } },
+  { type = "bookmarks", header = { "   Bookmarks" } }
 }
 
 g.mta_filetypes = {
-    html = 1,
-    xhtml = 1,
-    xml = 1,
-    jinja = 1,
-    javascript = 1,
-    typescript = 1
+  html = 1,
+  xhtml = 1,
+  xml = 1,
+  jinja = 1,
+  javascript = 1,
+  typescript = 1
 }
+
+g.blamer_delay = 200
 
 --- ### Autocmd
 ncmd [[autocmd VimEnter * silent! lcd%:p:h]]
@@ -108,8 +110,8 @@ command RefreshLSP call RefreshLSP()
 ]]
 
 --- ### Mapping
-local options = {noremap = true}
-local options1 = {noremap = true, silent = true}
+local options = { noremap = true }
+local options1 = { noremap = true, silent = true }
 
 -- General
 
@@ -156,6 +158,7 @@ keymap("n", "<Leader>S", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>", options)
 keymap("n", "<Leader>hh", ":noh<CR>", options)
 
 keymap("n", "<Leader>G", ":Git", options)
+keymap("n", "<Leader>b", ":BlamerToggle<CR>", options)
 
 keymap("n", "<Space><Up>", ":resize +5<CR>", options)
 keymap("n", "<Space><Down>", ":resize -5<CR>", options)

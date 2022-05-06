@@ -28,14 +28,13 @@ require "paq" {
   ------ NVIM
   "savq/paq-nvim",
   "lewis6991/gitsigns.nvim",
+  "APZelos/blamer.nvim",
   "hoob3rt/lualine.nvim",
   "kyazdani42/nvim-tree.lua",
   "akinsho/bufferline.nvim",
   "windwp/nvim-autopairs",
   { "neovim/nvim-lspconfig", branch = "v0.1.3" },
   "williamboman/nvim-lsp-installer",
-  "VonHeikemen/lsp-zero.nvim",
-  "L3MON4D3/LuaSnip",
   "tami5/lspsaga.nvim",
   "folke/lsp-colors.nvim",
   -- For auto completion
@@ -64,7 +63,6 @@ require("plugins/autopairs")
 require("plugins/nvim-tree")
 require("plugins/bufferline")
 require("plugins/cmp")
-require("plugins/formatter")
 require("plugins/treesitter")
 require("plugins/lualine")
 require("plugins/telescope")
