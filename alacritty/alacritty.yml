@@ -1,0 +1,90 @@
+# Window Customization
+window:
+  dimensions:
+    columns: 140
+    lines: 38
+  padding:
+    x: 6
+    y: 6
+  decorations: full #Still won't show in a window manger, but will in a desktop environment
+  opacity: .7
+scrolling:
+  history: 10000
+  multiplier: 3
+window.dynamic_title: true
+
+# Font Customization
+font:
+  normal:
+    family: Hack Nerd Font
+    style: Regular
+  bold:
+    family: Hack Nerd Font
+    style: Bold
+  italic:
+    family: Hack Nerd Font
+    style: Italic
+  size: 17
+  offset:
+    x: 0
+    y: 0
+  glyph_offset:
+    x: 0
+    y: 0
+  use_thin_strokes: true
+  debug:
+    persistent_logging: true
+draw_bold_text_with_bright_colors: true
+
+# Colors (iTerm 2 default theme)
+colors:
+  # Default colors
+  primary:
+    background: "#101421"
+    foreground: "#fffbf6"
+
+  # Normal colors
+  normal:
+    black: "#2e2e2e"
+    red: "#eb4129"
+    green: "#abe047"
+    yellow: "#f6c744"
+    blue: "#47a0f3"
+    magenta: "#7b5cb0"
+    cyan: "#64dbed"
+    white: "#e5e9f0"
+
+  # Bright colors
+  bright:
+    black: "#565656"
+    red: "#ec5357"
+    green: "#c0e17d"
+    yellow: "#f9da6a"
+    blue: "#49a4f8"
+    magenta: "#a47de9"
+    cyan: "#99faf2"
+    white: "#ffffff"
+
+# cursor:
+#   style:
+#     shape: Beam
+#     blinking: off
+#     blink-interval: 750
+#     unfocused_hollow: true
+
+key_bindings:
+  - { key: N, mods: Control, action: SpawnNewInstance }
+  - { key: A, mods: Command, chars: "\x0e" }
+  - { key: P, mods: Command, chars: "\x10" }
+  - { key: S, mods: Command, chars: "\x13" }
+  - { key: H, mods: Command, chars: "\x08" }
+  - { key: L, mods: Command, chars: "\x0c" }
+  - { key: J, mods: Command, chars: "\x0a" }
+  - { key: K, mods: Command, chars: "\x0b" }
+  - { key: W, mods: Command, chars: "\x3b\x64" }
+  - { key: Slash, mods: Command, chars: "\x67\x63\x63" }
+  - { key: H, mods: Alt, chars: "\x1bh" }
+  - { key: J, mods: Alt, chars: "\x1bj" }
+  - { key: K, mods: Alt, chars: "\x1bk" }
+  - { key: L, mods: Alt, chars: "\x1bl" }
+  - { key: T, mods: Alt, chars: "\x1bt" }
