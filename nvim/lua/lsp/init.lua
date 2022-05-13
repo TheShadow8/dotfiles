@@ -14,6 +14,22 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     }
 }
 
+local function lsp_highlight_document(client)
+    -- Set autocommands conditional on server_capabilities
+    if client.resolved_capabilities.document_highlight then
+        vim.api.nvim_exec(
+            [[
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]],
+            false
+        )
+    end
+end
+
 ---- Use an on_attach function to only map the following keys
 ---- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -57,14 +73,40 @@ local on_attach = function(client, bufnr)
         vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
         vim.api.nvim_command [[augroup END]]
     end
+
+    lsp_highlight_document(client)
 end
+
+-- Set which codelens text levels to show
+vim.diagnostic.config(
+    {
+        virtual_text = {
+            prefix = ""
+        }
+    }
+)
+
+-- icon
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+        signs = {
+            priority = 99
+        },
+        update_in_insert = true
+        -- This sets the spacing and the prefix, obviously.
+    }
+)
 
 nvim_lsp.flow.setup {
     on_attach = on_attach
 }
 
 nvim_lsp.golangci_lint_ls.setup {}
-nvim_lsp.gopls.setup {}
+nvim_lsp.gopls.setup {
+    on_attach = on_attach
+}
 
 nvim_lsp.sumneko_lua.setup(
     {
@@ -87,6 +129,17 @@ nvim_lsp.sumneko_lua.setup(
                     }
                 }
             }
+        },
+        on_attach = on_attach
+    }
+)
+
+nvim_lsp.tsserver.setup(
+    {
+        on_attach = on_attach,
+        handlers = {
+            ["textDocument/publishDiagnostics"] = function()
+            end
         }
     }
 )
@@ -164,38 +217,3 @@ nvim_lsp.efm.setup(
         }
     }
 )
-
--- icon
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
-        signs = {
-            priority = 99
-        },
-        update_in_insert = true
-        -- This sets the spacing and the prefix, obviously.
-    }
-)
-
--- Set which codelens text levels to show
-local original_set_virtual_text = vim.lsp.diagnostic.set_virtual_text
-local set_virtual_text_custom = function(diagnostics, bufnr, client_id, sign_ns, opts)
-    opts = opts or {}
-    -- show all messages that are Warning and above (Warning, Error)
-    opts.spacing = 4
-    opts.prefix = ""
-
-    local prefixed_diagnostics = vim.deepcopy(diagnostics)
-    for i, v in pairs(diagnostics) do
-        local source_name = ""
-        if v.source ~= nil then
-            source_name = v.source
-        end
-        prefixed_diagnostics[i].message = string.format("%s", source_name)
-        prefixed_diagnostics[i].message = ""
-    end
-    original_set_virtual_text(prefixed_diagnostics, bufnr, client_id, sign_ns, opts)
-end
-
-vim.lsp.diagnostic.set_virtual_text = set_virtual_text_custom

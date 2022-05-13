@@ -61,6 +61,8 @@ end
 cmd("filetype plugin indent on")
 cmd("colorscheme tokyonight") -- gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8, sonokai
 
+cmd([[au VimEnter * highlight LspReferenceText term=bold cterm=bold guibg=Grey40]])
+
 cmd [[au VimEnter * highlight Floaterm guibg=#505050]]
 cmd [[au VimEnter * highlight FloatermBorder guibg=#505050]]
 
