@@ -28,7 +28,7 @@ saga.init_lsp_saga {
 vim.api.nvim_set_keymap("n", "<Leader>]", "<Cmd>Lspsaga diagnostic_jump_next<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<Leader>[", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "gk", "<Cmd>Lspsaga hover_doc<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "gh", "<Cmd>Lspsaga lsp_finder<CR>", {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<Leader>ca", "<Cmd>Lspsaga code_action<CR>", {noremap = true, silent = true})
