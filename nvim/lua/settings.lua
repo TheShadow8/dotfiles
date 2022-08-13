@@ -6,62 +6,64 @@ local ncmd = vim.api.nvim_command
 local keymap = vim.api.nvim_set_keymap
 
 for key, val in pairs(
-  {
-  encoding = "utf8",
-  -- nocompatible = true,
-  number = true,
-  relativenumber = true,
-  tabstop = 2,
-  shiftwidth = 2,
-  smarttab = true,
-  expandtab = true,
-  errorbells = false,
-  wildmenu = true, -- Show menu to move to select. Example: find
-  history = 50,
-  clipboard = o.clipboard .. "unnamedplus",
-  backspace = "indent,eol,start",
-  guifont = "Fira Code:h13",
-  bg = "dark",
-  undodir = os.getenv("HOME") .. "/.vim/undodir",
-  undofile = true,
-  incsearch = true,
-  swapfile = false,
-  cursorline = true,
-  backup = false,
-  writebackup = false,
-  smartindent = true,
-  cmdheight = 2,
-  shortmess = o.shortmess .. "c",
-  hlsearch = true,
-  sidescroll = 1,
-  wrap = false,
-  switchbuf = "usetab",
-  lazyredraw = true,
-  title = true,
-  mouse = "a",
-  hidden = true,
-  updatetime = 300,
-  smartcase = true, -- Auto switch to case sensitive when Upper-case use (exp: Search ...),
-  colorcolumn = "80",
-  termguicolors = true, -- enable true colors support (24 bit colors) let g:go_def_mapping_enabled = 0,
-  titlestring = '%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%)', -- configure title to look like: Vim /path/to/file,
-  completeopt = "menu,menuone,noselect",
-  laststatus = 2, -- Always display the status line
-  background = "dark",
-  signcolumn = "number",
-  scrolloff = 6,
-  wildignore = "*/node_modules/*,*/dist/*",
-  grepprg = "rg --vimgrep --no-heading --smart-case",
-  grepformat = "%f:%l:%c:%m"
-}
+    {
+        encoding = "utf8",
+        -- nocompatible = true,
+        number = true,
+        relativenumber = true,
+        tabstop = 2,
+        shiftwidth = 2,
+        smarttab = true,
+        expandtab = true,
+        errorbells = false,
+        wildmenu = true, -- Show menu to move to select. Example: find
+        history = 50,
+        clipboard = o.clipboard .. "unnamedplus",
+        backspace = "indent,eol,start",
+        guifont = "Fira Code:h12",
+        bg = "dark",
+        undodir = os.getenv("HOME") .. "/.vim/undodir",
+        undofile = true,
+        incsearch = true,
+        swapfile = false,
+        cursorline = true,
+        backup = false,
+        writebackup = false,
+        smartindent = true,
+        cmdheight = 2,
+        shortmess = o.shortmess .. "c",
+        hlsearch = true,
+        sidescroll = 1,
+        wrap = false,
+        switchbuf = "usetab",
+        lazyredraw = true,
+        title = true,
+        mouse = "a",
+        hidden = true,
+        updatetime = 300,
+        smartcase = true, -- Auto switch to case sensitive when Upper-case use (exp: Search ...),
+        colorcolumn = "80",
+        termguicolors = true, -- enable true colors support (24 bit colors) let g:go_def_mapping_enabled = 0,
+        titlestring = '%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%)', -- configure title to look like: Vim /path/to/file,
+        completeopt = "menu,menuone,noselect",
+        laststatus = 2, -- Always display the status line
+        background = "dark",
+        signcolumn = "number",
+        scrolloff = 6,
+        wildignore = "*/node_modules/*,*/dist/*",
+        grepprg = "rg --vimgrep --no-heading --smart-case",
+        grepformat = "%f:%l:%c:%m"
+    }
 ) do
-  o[key] = val
+    o[key] = val
 end
 
 cmd("filetype plugin indent on")
 cmd("colorscheme tokyonight") -- gruvbox, codedark, ayu, dracula, tokyonight, gruvbox8, sonokai
 
 cmd([[au VimEnter * highlight LspReferenceText term=bold cterm=bold guibg=Grey40]])
+cmd([[au VimEnter * highlight LspReferenceWrite term=bold cterm=bold guibg=Grey40]])
+cmd([[au VimEnter * highlight LspReferenceRead term=bold cterm=bold guibg=Grey40]])
 
 cmd [[au VimEnter * highlight Floaterm guibg=#505050]]
 cmd [[au VimEnter * highlight FloatermBorder guibg=#505050]]
@@ -79,19 +81,19 @@ g.indentLine_enabled = 0
 g.startify_change_to_dir = 0
 g.startify_change_to_vcs_root = 1
 g.startify_lists = {
-  -- {type = "files", header = {"   Files"}},
-  { type = "dir", header = { ("  Current Directory " .. fn.getcwd()) } },
-  { type = "sessions", header = { "   Sessions" } },
-  { type = "bookmarks", header = { "   Bookmarks" } }
+    -- {type = "files", header = {"   Files"}},
+    {type = "dir", header = {("  Current Directory " .. fn.getcwd())}},
+    {type = "sessions", header = {"   Sessions"}},
+    {type = "bookmarks", header = {"   Bookmarks"}}
 }
 
 g.mta_filetypes = {
-  html = 1,
-  xhtml = 1,
-  xml = 1,
-  jinja = 1,
-  javascript = 1,
-  typescript = 1
+    html = 1,
+    xhtml = 1,
+    xml = 1,
+    jinja = 1,
+    javascript = 1,
+    typescript = 1
 }
 
 g.blamer_delay = 200
@@ -111,9 +113,11 @@ endfunction
 command RefreshLSP call RefreshLSP()
 ]]
 
+cmd [[command! Lazygit FloatermNew lazygit]]
+
 --- ### Mapping
-local options = { noremap = true }
-local options1 = { noremap = true, silent = true }
+local options = {noremap = true}
+local options1 = {noremap = true, silent = true}
 
 -- General
 
@@ -123,6 +127,8 @@ keymap("i", "jj", "<ESC>", options)
 keymap("i", "jl", "<Right>", options)
 keymap("v", ">", ">gv", options)
 keymap("v", "<", "<gv", options)
+keymap("n", "<Leader>'", "ysiw", {})
+keymap("n", '<Leader>"', "yss", {})
 
 -- Make dir, file from current dir
 keymap("n", "<Leader>w", ":! mkdir %:h/", options)
@@ -183,6 +189,10 @@ keymap("n", "<F8>", ":FloatermPrev<CR>", options1)
 keymap("t", "<F8>", "<C-\\><C-n>:FloatermPrev<CR>", options1)
 keymap("n", "<F9>", ":FloatermNext<CR>", options1)
 keymap("t", "<F9>", "<C-\\><C-n>:FloatermNext<CR>", options1)
+keymap("n", "<F10>", ":FloatermToggle<CR>", options1)
+keymap("t", "<F10>", "<C-\\><C-n>:FloatermToggle<CR>", options1)
 keymap("n", "<F12>", ":FloatermToggle<CR>", options1)
 keymap("t", "<F12>", "<C-\\><C-n>:FloatermToggle<CR>", options1)
-keymap("t", "<Esc>", "<C-\\><C-n>", options1)
+keymap("t", "<Leader><Esc>", "<C-\\><C-n>", options1)
+
+keymap("n", "<Leader>L", ":Lazygit<CR>", options1)

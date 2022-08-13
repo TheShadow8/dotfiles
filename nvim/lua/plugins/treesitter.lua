@@ -29,7 +29,8 @@ require "nvim-treesitter.configs".setup {
         "scss",
         "go",
         "javascript",
-        "typescript"
+        "typescript",
+        "solidity"
     }
 }
 

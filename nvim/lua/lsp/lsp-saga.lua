@@ -1,33 +1,36 @@
 local saga = require("lspsaga")
 
-saga.init_lsp_saga {
-    use_saga_diagnostic_sign = true,
-    -- error_sign = "",
-    -- warn_sign = "",
-    -- hint_sign = "",
-    -- infor_sign = "",
+saga.init_lsp_saga(
+    {
+        border_style = "bold",
+        show_diagnostic_source = true,
+        -- diagnostic_header = {" ", " ", " ", "ﴞ "},
+        -- diagnostic_header = {" ", " ", " ", " "},
 
-    max_preview_lines = 20,
-    error_sign = " ",
-    warn_sign = " ",
-    hint_sign = " ",
-    infor_sign = " ",
-    border_style = "round",
-    code_action_icon = " ",
-    code_action_prompt = {
-        enable = true,
-        sign = false,
-        -- sign_priority = 20,
-        virtual_text = true
-    },
-    finder_action_keys = {quit = "<ESC>", open = "<CR>"},
-    code_action_keys = {quit = "<ESC>"},
-    rename_action_keys = {quit = "<ESC>"}
-}
+        max_preview_lines = 20,
+        code_action_icon = " ",
+        code_action_lightbulb = {
+            enable = true,
+            sign = false,
+            -- sign_priority = 20,
+            virtual_text = true
+        },
+        finder_action_keys = {
+            open = "<CR>",
+            quit = "<ESC>"
+            -- quit can be a table
+        },
+        code_action_keys = {
+            quit = "<ESC>"
+        },
+        rename_action_quit = "<ESC>"
+    }
+)
 
 vim.api.nvim_set_keymap("n", "<Leader>]", "<Cmd>Lspsaga diagnostic_jump_next<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<Leader>[", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", {noremap = true, silent = true})
 
+vim.api.nvim_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "gk", "<Cmd>Lspsaga hover_doc<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "gh", "<Cmd>Lspsaga lsp_finder<CR>", {noremap = true, silent = true})
 
@@ -56,4 +59,4 @@ vim.api.nvim_set_keymap(
     {noremap = true, silent = true}
 )
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'lspsaga.diagnostic'.show_line_diagnostics()]]
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'lspsaga.diagnostic'.show_line_diagnostics()]]

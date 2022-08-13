@@ -9,7 +9,8 @@ require("telescope").setup {
             "--with-filename",
             "--line-number",
             "--column",
-            "--smart-case"
+            "--smart-case",
+            "--no-ignore"
         },
         sorting_strategy = "ascending",
         layout_config = {
@@ -53,7 +54,12 @@ local options = {
 vim.api.nvim_set_keymap("n", "<Leader>B", '<cmd>lua require("telescope.builtin").file_browser()<CR>', options)
 vim.api.nvim_set_keymap("n", "<Leader>bb", '<cmd>lua require("telescope.builtin").buffers()<CR>', options)
 
-vim.api.nvim_set_keymap("n", "<C-p>", '<cmd>lua require("telescope.builtin").find_files({ hidden=true })<CR>', options)
+vim.api.nvim_set_keymap(
+    "n",
+    "<C-p>",
+    '<cmd>lua require("telescope.builtin").find_files({ hidden=true, no_ignore=true })<CR>',
+    options
+)
 
 vim.api.nvim_set_keymap("n", "<Leader>f", '<cmd>lua require("telescope.builtin").live_grep()<CR>', options)
 vim.api.nvim_set_keymap("n", "<Leader>F", '<cmd>lua require("telescope.builtin").grep_string()<CR>', options)
