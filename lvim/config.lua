@@ -101,7 +101,9 @@ lvim.builtin.treesitter.highlight.enabled = true
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "gofumpt", arg = "-extra", filetypes = { "go" } },
-  { command = "goimports", filetypes = { "go" } }
+  { command = "goimports", filetypes = { "go" } },
+  { command = "prettier", filetypes = { "javascript" } },
+  { command = "prettier", filetypes = { "typescript" } }
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
