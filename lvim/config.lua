@@ -58,6 +58,7 @@ lvim.builtin.which_key.mappings["p"] = { require("lvim.core.telescope.custom-fin
 lvim.builtin.which_key.mappings["P"] = {
   name = "Packer",
   c = { "<cmd>PackerCompile<cr>", "Compile" },
+  -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
   i = { "<cmd>PackerInstall<cr>", "Install" },
   r = { "<cmd>lua require('lvim.plugin-loader').recompile()<cr>", "Re-compile" },
   s = { "<cmd>PackerSync<cr>", "Sync" },
@@ -65,17 +66,22 @@ lvim.builtin.which_key.mappings["P"] = {
   u = { "<cmd>PackerUpdate<cr>", "Update" }
 }
 
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+
 -- lvim.builtin.alpha.active = false
---
 lvim.builtin.project.manual_mode = true
 lvim.builtin.nvimtree.setup.sync_root_with_cwd = false
 lvim.builtin.nvimtree.setup.update_cwd = false
 lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
+
+
+lvim.builtin.cmp.completion = {
+  completeopt = "menu,menuone,noinsert"
+}
+
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -102,14 +108,13 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "gofumpt", arg = "-extra", filetypes = { "go" } },
   { command = "goimports", filetypes = { "go" } },
-  { command = "prettier", filetypes = { "javascript" } },
-  { command = "prettier", filetypes = { "typescript" } }
+  { command = "prettier", arg = "--find-config-path --stdin-filepath ${INPUT}",
+    filetypes = { "javascript", "typescript" } },
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { command = "eslint_d", filetypes = { "javascript" } },
-  { command = "eslint_d", filetypes = { "typescript" } }
+  { command = "eslint_d", filetypes = { "javascript", "typescript" } },
 }
 
 -- Additional Plugins
