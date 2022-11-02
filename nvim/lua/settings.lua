@@ -20,7 +20,7 @@ for key, val in pairs(
         history = 50,
         clipboard = o.clipboard .. "unnamedplus",
         backspace = "indent,eol,start",
-        guifont = "Fira Code:h12",
+        guifont = "Inconsolata",
         bg = "dark",
         undodir = os.getenv("HOME") .. "/.vim/undodir",
         undofile = true,
@@ -72,7 +72,10 @@ cmd [[au VimEnter * hi GitSignsAdd guifg=#00D000 ctermfg=2]]
 cmd [[au VimEnter * hi GitSignsChange guifg=#EBEB00 ctermfg=3]]
 cmd [[au VimEnter * hi GitSignsDelete guifg=#ff2222 ctermfg=1]]
 
-g.mapleader = ";"
+-- cmd [[au VimEnter * hi Normal guibg=#0e0e0e ctermfg=16]]
+
+g.mapleader = " "
+
 g.node_client_debug = 1
 g.floaterm_width = 0.9
 g.floaterm_height = 0.9
@@ -125,6 +128,7 @@ keymap("n", "<Leader>R", ":RefreshLSP<CR>", options)
 keymap("c", "jj", "<C-C>", options)
 keymap("i", "jj", "<ESC>", options)
 keymap("i", "jl", "<Right>", options)
+keymap("i", "jh", "<Left>", options)
 keymap("v", ">", ">gv", options)
 keymap("v", "<", "<gv", options)
 keymap("n", "<Leader>'", "ysiw", {})
@@ -135,8 +139,8 @@ keymap("n", "<Leader>w", ":! mkdir %:h/", options)
 keymap("n", "<Leader>e", ":e %:h/", options)
 
 -- Map commentary
-keymap("v", "<C-_>", "gc", {})
-keymap("n", "<C-_>", "gcc", {})
+keymap("v", "<Leader>/", "gc", {})
+keymap("n", "<Leader>/", "gcc", {})
 keymap("i", "<C-_>", "<Esc>VgcA", {})
 
 -- Move a line down/up

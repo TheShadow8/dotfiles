@@ -38,6 +38,8 @@ require "paq" {
     "glepnir/lspsaga.nvim",
     "folke/lsp-colors.nvim",
     "simrat39/rust-tools.nvim",
+    "ray-x/go.nvim",
+    "ray-x/guihua.lua",
     -- For auto completion
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-buffer",

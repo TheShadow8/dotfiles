@@ -56,5 +56,6 @@ require "nvim-tree".setup {
 local options = {noremap = true}
 
 vim.api.nvim_set_keymap("n", "<A-t>", "<cmd>NvimTreeToggle<CR>", options)
+vim.api.nvim_set_keymap("n", "<Leader>e", "<cmd>NvimTreeToggle<CR>", options)
 vim.api.nvim_set_keymap("n", "<Leader>r", "<cmd>NvimTreeRefresh<CR>", options)
 vim.api.nvim_set_keymap("n", "<Leader>n", "<cmd>NvimTreeFindFile<CR>", options)

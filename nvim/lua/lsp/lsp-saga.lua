@@ -3,7 +3,7 @@ local saga = require("lspsaga")
 saga.init_lsp_saga(
     {
         border_style = "bold",
-        show_diagnostic_source = true,
+        -- show_diagnostic_source = true,
         -- diagnostic_header = {" ", " ", " ", "ﴞ "},
         -- diagnostic_header = {" ", " ", " ", " "},
 
@@ -34,8 +34,8 @@ vim.api.nvim_set_keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", {noremap = true,
 vim.api.nvim_set_keymap("n", "gk", "<Cmd>Lspsaga hover_doc<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "gh", "<Cmd>Lspsaga lsp_finder<CR>", {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap("n", "<Leader>ca", "<Cmd>Lspsaga code_action<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "<Leader>ca", "<Cmd><C-U>Lspsaga range_code_action<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "ca", "<Cmd>Lspsaga code_action<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "ca", "<Cmd><C-U>Lspsaga range_code_action<CR>", {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("i", "<C-k>", "<Cmd>Lspsaga signature_help<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "gs", "<Cmd>Lspsaga signature_help<CR>", {noremap = true, silent = true})

@@ -61,6 +61,14 @@ vim.api.nvim_set_keymap(
     options
 )
 
+vim.api.nvim_set_keymap(
+    "n",
+    "<Leader>p",
+    '<cmd>lua require("telescope.builtin").find_files({ hidden=true, no_ignore=true })<CR>',
+    options
+)
+
+
 vim.api.nvim_set_keymap("n", "<Leader>f", '<cmd>lua require("telescope.builtin").live_grep()<CR>', options)
 vim.api.nvim_set_keymap("n", "<Leader>F", '<cmd>lua require("telescope.builtin").grep_string()<CR>', options)
 vim.api.nvim_set_keymap(
