@@ -33,10 +33,31 @@ keymap("v", "<C-_>", "gc", {})
 keymap("n", "<C-_>", "gcc", {})
 keymap("i", "<C-_>", "<Esc>VgcA", {})
 
+keymap("n", "<A-l>", ":bnext<CR>", options)
+keymap("n", "<A-h>", ":bprev<CR>", options)
+
 keymap("n", "<C-p>", '<cmd>lua require("telescope.builtin").find_files({ hidden=true, no_ignore=true })<CR>', options)
+keymap("n", "<A-t>", "<cmd>NvimTreeToggle<CR>", options)
+
+
+keymap("n", "go", ":noh", { desc = "Go Tool", noremap = true })
+keymap("n", "got", "<cmd>GoTestFunc -s<CR>", { desc = "Go Test Func", noremap = true })
+keymap("n", "gof", "<cmd>GoFillStruct<CR>", { desc = "Go Fill Struct", noremap = true })
+keymap("n", "goe", "<cmd>GoIfErr<CR>", { desc = "Go If Err", noremap = true })
+keymap("i", "jf", "<cmd>GoFillStruct<CR>", { desc = "Go Fill Struct", noremap = true })
+keymap("i", "je", "<cmd>GoIfErr<CR>", { desc = "Go Fill Struct", noremap = true })
+
+-- lvim.builtin.which_key.mappings["go"] = {
+--   name = "Go", -- optional group name
+--   t = { "<cmd>GoTestFunc -s<CR>", "Go Test Func" }, -- create a binding with label
+--   f = { "<cmd>GoFillStruct<Cr>", "Go Fill Struct" }, -- additional options for creating the keymap
+-- }
 
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+
+lvim.lsp.buffer_mappings.normal_mode["ga"] = { vim.lsp.buf.code_action, "Code action" }
+
 
 lvim.builtin.telescope.defaults = {
   sorting_strategy = "ascending",
@@ -48,13 +69,14 @@ lvim.builtin.telescope.defaults = {
   file_ignore_patterns = { "node_modules", "^.git/" }
 }
 
-lvim.builtin.terminal.direction = "vertical"
+lvim.builtin.terminal.direction = "horizontal"
 lvim.builtin.terminal.open_mapping = "<F12>"
-lvim.builtin.terminal.size = 25
+lvim.builtin.terminal.size = 8
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope live_grep <CR>", "Find text" }
 lvim.builtin.which_key.mappings["F"] = { "<cmd>Telescope grep_string <CR>", "Find current word" }
-lvim.builtin.which_key.mappings["p"] = { require("lvim.core.telescope.custom-finders").find_project_files, "Find File" }
+lvim.builtin.which_key.mappings["p"] = { "<cmd>lua require('telescope.builtin').find_files({ hidden=true, no_ignore=true })<CR>",
+  "Find File" }
 lvim.builtin.which_key.mappings["P"] = {
   name = "Packer",
   c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -119,8 +141,19 @@ linters.setup {
 
 -- Additional Plugins
 lvim.plugins = {
-  { "ghifarit53/tokyonight-vim" }
+  { "ghifarit53/tokyonight-vim" },
+  {
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  },
+
+  { "ray-x/go.nvim",
+    config = function() require('go').setup() end
+  },
+  { "ray-x/guihua.lua" }
 }
+
+
 
 local startify = require("alpha.themes.startify")
 local fortune = require("alpha.fortune")
