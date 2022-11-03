@@ -27,6 +27,7 @@ require "paq" {
     "voldikss/vim-floaterm",
     ------ NVIM
     "savq/paq-nvim",
+    "folke/which-key.nvim",
     "lewis6991/gitsigns.nvim",
     "APZelos/blamer.nvim",
     "hoob3rt/lualine.nvim",
@@ -60,6 +61,7 @@ require "paq" {
     "nvim-telescope/telescope.nvim"
 }
 
+require("plugins.which-key")
 require("plugins/web-devicons")
 require("plugins/colorizer")
 require("plugins/autopairs")

@@ -2,6 +2,7 @@
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "tokyonight"
+
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -12,6 +13,7 @@ local options = { noremap = true }
 local keymap = vim.api.nvim_set_keymap
 -- local g = vim.g
 -- local fn = vim.fn
+vim.opt.timeoutlen = 200
 
 keymap("c", "jj", "<C-C>", options)
 keymap("i", "jj", "<ESC>", options)
@@ -39,9 +41,10 @@ keymap("n", "<A-h>", ":bprev<CR>", options)
 keymap("n", "<C-p>", '<cmd>lua require("telescope.builtin").find_files({ hidden=true, no_ignore=true })<CR>', options)
 keymap("n", "<A-t>", "<cmd>NvimTreeToggle<CR>", options)
 
-
-keymap("n", "go", ":noh", { desc = "Go Tool", noremap = true })
-keymap("n", "got", "<cmd>GoTestFunc -s<CR>", { desc = "Go Test Func", noremap = true })
+keymap("n", "go", "<Esc>", { desc = "Go Tool", noremap = true })
+keymap("n", "gos", "<cmd>GoTestFunc -s<CR>", { desc = "Go Test Func Select", noremap = true })
+keymap("n", "got", "<cmd>GoTestFunc<CR>", { desc = "Go Test Func", noremap = true })
+keymap("n", "goT", "<cmd>GoTestFunc -F<CR>", { desc = "Go Test Func Floaterm", noremap = true })
 keymap("n", "gof", "<cmd>GoFillStruct<CR>", { desc = "Go Fill Struct", noremap = true })
 keymap("n", "goe", "<cmd>GoIfErr<CR>", { desc = "Go If Err", noremap = true })
 keymap("i", "jf", "<cmd>GoFillStruct<CR>", { desc = "Go Fill Struct", noremap = true })
@@ -57,7 +60,6 @@ lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 
 lvim.lsp.buffer_mappings.normal_mode["ga"] = { vim.lsp.buf.code_action, "Code action" }
-
 
 lvim.builtin.telescope.defaults = {
   sorting_strategy = "ascending",
@@ -75,8 +77,10 @@ lvim.builtin.terminal.size = 8
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope live_grep <CR>", "Find text" }
 lvim.builtin.which_key.mappings["F"] = { "<cmd>Telescope grep_string <CR>", "Find current word" }
-lvim.builtin.which_key.mappings["p"] = { "<cmd>lua require('telescope.builtin').find_files({ hidden=true, no_ignore=true })<CR>",
-  "Find File" }
+lvim.builtin.which_key.mappings["p"] = {
+  "<cmd>lua require('telescope.builtin').find_files({ hidden=true, no_ignore=true })<CR>",
+  "Find File"
+}
 lvim.builtin.which_key.mappings["P"] = {
   name = "Packer",
   c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -88,8 +92,6 @@ lvim.builtin.which_key.mappings["P"] = {
   u = { "<cmd>PackerUpdate<cr>", "Update" }
 }
 
-
-lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
@@ -99,11 +101,9 @@ lvim.builtin.nvimtree.setup.sync_root_with_cwd = false
 lvim.builtin.nvimtree.setup.update_cwd = false
 lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
 
-
 lvim.builtin.cmp.completion = {
   completeopt = "menu,menuone,noinsert"
 }
-
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -130,13 +130,16 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "gofumpt", arg = "-extra", filetypes = { "go" } },
   { command = "goimports", filetypes = { "go" } },
-  { command = "prettier", arg = "--find-config-path --stdin-filepath ${INPUT}",
-    filetypes = { "javascript", "typescript" } },
+  {
+    command = "prettier",
+    arg = "--find-config-path --stdin-filepath ${INPUT}",
+    filetypes = { "javascript", "typescript" }
+  }
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { command = "eslint_d", filetypes = { "javascript", "typescript" } },
+  { command = "eslint_d", filetypes = { "javascript", "typescript" } }
 }
 
 -- Additional Plugins
@@ -144,16 +147,18 @@ lvim.plugins = {
   { "ghifarit53/tokyonight-vim" },
   {
     "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
+    run = function()
+      vim.fn["mkdp#util#install"]()
+    end
   },
-
-  { "ray-x/go.nvim",
-    config = function() require('go').setup() end
+  {
+    "ray-x/go.nvim",
+    config = function()
+      require("go").setup()
+    end
   },
   { "ray-x/guihua.lua" }
 }
-
-
 
 local startify = require("alpha.themes.startify")
 local fortune = require("alpha.fortune")
