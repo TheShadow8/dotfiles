@@ -1,9 +1,13 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
 local keymap = vim.api.nvim_set_keymap
 local options = { noremap = true }
 local options1 = { noremap = true, silent = true }
 
 -- General
 keymap("n", "<Leader>R", ":RefreshLSP<CR>", options)
+keymap("n", "<Leader>q", ":q<CR>", options)
 keymap("c", "jj", "<C-C>", options)
 keymap("i", "jj", "<ESC>", options)
 keymap("i", "jl", "<Right>", options)
@@ -79,7 +83,7 @@ keymap("n", "<Leader>n", "<cmd>NvimTreeFindFile<CR>", options)
 keymap("n", "<Leader>B", '<cmd>lua require("telescope.builtin").file_browser()<CR>', options)
 keymap("n", "<Leader>bb", '<cmd>lua require("telescope.builtin").buffers()<CR>', options)
 
-keymap("n", "<C-p>", '<cmd>lua require("telescope.builtin").find_files({ hidden=true, no_ignore=true })<CR>', options)
+keymap("n", "<C-p>", '<cmd>lua require("telescope.builtin").find_files({ hidden=true , no_ignore=true })<CR>', options)
 
 keymap(
   "n",
@@ -104,15 +108,12 @@ keymap("n", "<Leader>]", "<Cmd>Lspsaga diagnostic_jump_next<CR>", options1)
 keymap("n", "<Leader>[", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", options1)
 
 keymap("n", "K", "<Cmd>Lspsaga hover_doc<CR>", options1)
-keymap("n", "gk", "<Cmd>Lspsaga hover_doc<CR>", options1)
-keymap("n", "gh", "<Cmd>Lspsaga lsp_finder<CR>", options1)
+keymap("n", "gh", "<Cmd>Lspsaga finder def+ref<CR>", options1)
 
 keymap("n", "ga", "<Cmd>Lspsaga code_action<CR>", options1)
 keymap("v", "ga", "<Cmd><C-U>Lspsaga range_code_action<CR>", options1)
 
-keymap("i", "<C-k>", "<Cmd>Lspsaga signature_help<CR>", options1)
-keymap("n", "gs", "<Cmd>Lspsaga signature_help<CR>", options1)
-keymap("n", "<Leader>gd", "<Cmd>Lspsaga preview_definition<CR>", options1)
+keymap("n", "<Leader>gd", "<Cmd>Lspsaga peek_definition<CR>", options1)
 
 keymap("n", "gk", "<Cmd>Lspsaga show_cursor_diagnostics<CR>", options1)
 keymap("n", "gl", "<Cmd>Lspsaga show_line_diagnostics<CR>", options1)

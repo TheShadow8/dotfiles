@@ -1,38 +1,52 @@
-require "nvim-treesitter.configs".setup {
-    context_commentstring = {
-        enable = true
-    },
-    -- matchup = {
-    --     enable = true,
-    --     disable = {}
-    -- },
-    highlight = {
+return {
+  "nvim-treesitter/nvim-treesitter",
+  event = { "BufReadPre", "BufNewFile" },
+  build = ":TSUpdate",
+  dependencies = {
+    "windwp/nvim-ts-autotag",
+  },
+  config = function()
+    -- import nvim-treesitter plugin
+    local treesitter = require("nvim-treesitter.configs")
+
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
+
+    -- configure treesitter
+    treesitter.setup({ -- enable syntax highlighting
+      highlight = {
         enable = true,
-        disable = {
-            "html"
-        }
-    },
-    indent = {
-        enable = false,
-        disable = {}
-    },
-    autotag = {
-        enable = true
-    },
-    ensure_installed = {
-        "tsx",
-        "toml",
-        "graphql",
+      },
+      -- enable indentation
+      indent = { enable = true },
+      -- enable autotagging (w/ nvim-ts-autotag plugin)
+      autotag = {
+        enable = true,
+      },
+      -- ensure these language parsers are installed
+      ensure_installed = {
         "json",
-        "yaml",
-        "html",
-        "scss",
-        "go",
         "javascript",
         "typescript",
-        "solidity"
-    }
+        "tsx",
+        "yaml",
+        "html",
+        "css",
+        "prisma",
+        "markdown",
+        "markdown_inline",
+        "svelte",
+        "graphql",
+        "bash",
+        "lua",
+        "vim",
+        "dockerfile",
+        "gitignore",
+        "query",
+        "vimdoc",
+        "go",
+      },
+    })
+  end,
 }
 
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tsx.filetype_to_parsername = {"javascript", "typescript.tsx"}
